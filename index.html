@@ -214,7 +214,7 @@ footer.reveal{animation-delay:2.25s}
   </header>
 
   <nav aria-label="Odkazy Defence Hub">
-    <a class="link reveal" href="https://defencehub.gov.cz/" target="_blank" rel="noopener">
+    <a class="link reveal" id="linkWeb" href="https://defencehub.gov.cz/" target="_blank" rel="noopener">
       <span class="icon i-web" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></svg>
       </span>
@@ -281,6 +281,7 @@ footer.reveal{animation-delay:2.25s}
     cs: {
       tagline:"Národní brána defence & dual-use inovací. Všechno důležité na jeden dotek.",
       web_t:"Web Defence Hub", web_d:"defencehub.gov.cz — vše o nás na jednom místě",
+      web_href:"https://defencehub.gov.cz/",
       app_t:"DH Kompas — demo", app_d:"Průvodce programy a financováním pro startupy",
       in_t:"LinkedIn", in_d:"Novinky, akce a příběhy z komunity",
       db_t:"Databáze řešení", db_d:"Zapište svou firmu — buďte vidět pro armádu i partnery",
@@ -290,6 +291,7 @@ footer.reveal{animation-delay:2.25s}
     en: {
       tagline:"The national gateway for defence & dual-use innovation. Everything that matters, one tap away.",
       web_t:"Defence Hub website", web_d:"defencehub.gov.cz — everything about us in one place",
+      web_href:"https://defencehub.gov.cz/defence-hub-en/",
       app_t:"DH Kompas — demo", app_d:"Your guide to programmes and funding for startups",
       in_t:"LinkedIn", in_d:"News, events and stories from the community",
       db_t:"Solutions Database", db_d:"Register your company — get seen by the armed forces and partners",
@@ -304,6 +306,7 @@ footer.reveal{animation-delay:2.25s}
     document.querySelectorAll('[data-i18n]').forEach(function(el){
       var t=d[el.getAttribute('data-i18n')]; if(t) el.textContent=t;
     });
+    document.getElementById('linkWeb').href=d.web_href;
     var replay=document.getElementById('replay');
     replay.setAttribute('aria-label',d.replay); replay.title=(l==='en')?'Launch again 🚀':'Znovu odpálit 🚀';
     document.querySelector('nav').setAttribute('aria-label',d.nav);
