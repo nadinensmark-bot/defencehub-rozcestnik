@@ -1,4 +1,4 @@
-<!-- Defence Hub rozcestník, blok Vlastní HTML pro WordPress (stránka /nfc/, ID 330, šablona dh-blank). Generováno z index.html, verze 16. 9. 2026 v2.2 (overlay vizitky, jazyk podle akce). V JS nesmí být znak ampersand (WordPress ho přepisuje). -->
+<!-- Defence Hub rozcestník, blok Vlastní HTML pro WordPress (stránka /nfc/, ID 330, šablona dh-blank). Generováno z index.html, verze 16. 9. 2026 v2.3 (fotky, databáze prohlížet/zapsat, rozdávací bez kontaktních karet). V JS nesmí být znak ampersand (WordPress ho přepisuje). -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -166,6 +166,8 @@ footer.reveal{animation-delay:2.7s}
 #vcOverlay{position:fixed;inset:0;z-index:70;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(6,12,30,.82);backdrop-filter:blur(6px)}
 #vcOverlay.show{display:flex}
 .vcCard{width:100%;max-width:380px;background:#13234E;border:1px solid rgba(255,255,255,.14);border-radius:22px;padding:28px 22px 20px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.vcPhoto{width:96px;height:96px;border-radius:50%;object-fit:cover;margin:0 auto 14px;display:block;border:2px solid rgba(140,170,114,.6)}
+.vcPhoto[hidden]{display:none}
 .vcInit{width:72px;height:72px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;background:rgba(140,170,114,.25);color:#CFE0BC;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;letter-spacing:.02em}
 .vcName{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;margin:0 0 4px}
 .vcTitle{color:var(--muted);font-size:13.5px;margin:0 0 6px}
@@ -215,6 +217,7 @@ footer.reveal{animation-delay:2.7s}
 <div id="vcOverlay" role="dialog" aria-modal="true" aria-labelledby="vcName">
   <div class="vcCard">
     <div class="vcInit" id="vcInit" aria-hidden="true">DH</div>
+    <img class="vcPhoto" id="vcPhoto" alt="" hidden>
     <p class="vcName" id="vcName"></p>
     <p class="vcTitle" id="vcTitle"></p>
     <p class="vcOrg">Defence Hub CzechInvest</p>
@@ -277,9 +280,15 @@ footer.reveal{animation-delay:2.7s}
       <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
     </a>
 
-    <a class="link reveal " id="linkDb" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=q8gL-se0sUOvIxgC0ZUHltmg99bB9nRNljlL-s5gE0FUM1pDSzBTRUhXSzNFMjJSUkZKSUZXNkhTWC4u" target="_blank" rel="noopener">
+    <a class="link reveal " id="linkDbBrowse" href="https://defencehub.gov.cz/databaze-reseni/" target="_blank" rel="noopener">
       <span class="icon i-db" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12v7c0 1.66 3.58 3 8 3s8-1.34 8-3v-7"/></svg></span>
-      <span><b data-i18n="db_t">Databáze řešení</b><small data-i18n="db_d">Zapište svou firmu, buďte vidět pro armádu i partnery</small></span>
+      <span><b data-i18n="dbb_t">Databáze řešení</b><small data-i18n="dbb_d">Prohlédněte si české dual-use firmy a jejich řešení</small></span>
+      <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+    </a>
+
+<a class="link reveal " id="linkDb" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=q8gL-se0sUOvIxgC0ZUHltmg99bB9nRNljlL-s5gE0FUM1pDSzBTRUhXSzNFMjJSUkZKSUZXNkhTWC4u" target="_blank" rel="noopener">
+      <span class="icon i-db" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12v7c0 1.66 3.58 3 8 3s8-1.34 8-3v-7"/></svg></span>
+      <span><b data-i18n="db_t">Zapsat firmu do databáze</b><small data-i18n="db_d">Formulář pro firmy, buďte vidět pro armádu i partnery</small></span>
       <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
     </a>
 
@@ -323,16 +332,16 @@ footer.reveal{animation-delay:2.7s}
 })();
 
 // ================= KONFIGURACE (jediné místo, které se edituje) =================
-// Klíčenky: osobní = ?who=nadine (volitelně go=vcard), rozdávací = bez parametrů. POZOR: v JS nepoužívat znak ampersand, WordPress ho přepisuje.
+// Klíčenky: osobní = ?who=nadine (volitelně go=vcard) = vizitka + Pošlete nám kontakt + rozcestník; rozdávací = bez parametrů = jen rozcestník. POZOR: v JS nepoužívat znak ampersand, WordPress ho přepisuje.
 var DH_CONFIG = {
   collector: "nada.sokolova@czechinvest.gov.cz",   // sběrná schránka (Power Automate, Excel)
   team: {
-    dh:     {name:"Defence Hub CzechInvest", title:{cs:"",en:""}, vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/dh.vcf", cc:null, book:null},
-    nadine: {name:"Nadine Sokolová",   title:{cs:"Marketing, programy a partnerství",en:"Marketing, Programmes \u0026 Partnerships"}, vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/nadine.vcf", cc:"nada.sokolova@czechinvest.gov.cz",     book:"https://outlook.office.com/book/DefenceHubCzechInvestinfomeeting@czechinvest.onmicrosoft.com/s/Crb3WpYvn0Ob9AYq4nu6jA2"},
-    leos:   {name:"Leoš Mauer",        title:{cs:"Ředitel Defence Hubu",en:"Director, Defence Hub"},                       vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/leos.vcf",   cc:"leos.mauer@czechinvest.gov.cz",        book:"https://outlook.office.com/book/DefenceHubCzechInvestinfomeeting@czechinvest.onmicrosoft.com/s/kf5KjE70I0Se9EdfDZmOiQ2"},
-    katka:  {name:"Kateřina Nováková", title:{cs:"Investoři a startupy",en:"Investors \u0026 Startups"},                         vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/katka.vcf",  cc:"katerina.novakova@czechinvest.gov.cz", book:"https://outlook.office.com/book/DefenceHubCzechInvestinfomeeting@czechinvest.onmicrosoft.com/s/7uDYKplQTki2QobQKrz9Mg2"},
-    martin: {name:"Martin Hýža",       title:{cs:"NATO DIANA akcelerátor",en:"NATO DIANA Accelerator"},                     vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/martin.vcf", cc:"martin.hyza@czechinvest.gov.cz",       book:"https://outlook.office.com/book/DefenceHubCzechInvestinfomeeting@czechinvest.onmicrosoft.com/s/SGn51imIe0qL3dZMo9AGwQ2"},
-    honza:  {name:"Jan Trojáček",      title:{cs:"Mentoring a komunita",en:"Mentoring \u0026 Community"},                        vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/honza.vcf",  cc:"jan.trojacek@czechinvest.gov.cz",      book:"https://outlook.office.com/book/DefenceHubCzechInvestinfomeeting@czechinvest.onmicrosoft.com/s/Dp663Eyji0SmN4PHpOxTwQ2"}
+    dh:     {name:"Defence Hub CzechInvest", title:{cs:"",en:""}, vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/dh.vcf", photo:null, cc:null, book:null},
+    nadine: {name:"Nadine Sokolová",   title:{cs:"Marketing, programy a partnerství",en:"Marketing, Programmes \u0026 Partnerships"}, vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/nadine.vcf", photo:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/img/nadine.jpg", cc:"nada.sokolova@czechinvest.gov.cz",     book:"https://outlook.office.com/book/DefenceHubCzechInvestinfomeeting@czechinvest.onmicrosoft.com/s/Crb3WpYvn0Ob9AYq4nu6jA2"},
+    leos:   {name:"Leoš Mauer",        title:{cs:"Ředitel Defence Hubu",en:"Director, Defence Hub"},                       vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/leos.vcf", photo:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/img/leos.jpg",   cc:"leos.mauer@czechinvest.gov.cz",        book:"https://outlook.office.com/book/DefenceHubCzechInvestinfomeeting@czechinvest.onmicrosoft.com/s/kf5KjE70I0Se9EdfDZmOiQ2"},
+    katka:  {name:"Kateřina Nováková", title:{cs:"Investoři a startupy",en:"Investors \u0026 Startups"},                         vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/katka.vcf", photo:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/img/katka.jpg",  cc:"katerina.novakova@czechinvest.gov.cz", book:"https://outlook.office.com/book/DefenceHubCzechInvestinfomeeting@czechinvest.onmicrosoft.com/s/7uDYKplQTki2QobQKrz9Mg2"},
+    martin: {name:"Martin Hýža",       title:{cs:"NATO DIANA akcelerátor",en:"NATO DIANA Accelerator"},                     vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/martin.vcf", photo:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/img/martin.jpg", cc:"martin.hyza@czechinvest.gov.cz",       book:"https://outlook.office.com/book/DefenceHubCzechInvestinfomeeting@czechinvest.onmicrosoft.com/s/SGn51imIe0qL3dZMo9AGwQ2"},
+    honza:  {name:"Jan Trojáček",      title:{cs:"Mentoring a komunita",en:"Mentoring \u0026 Community"},                        vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/honza.vcf", photo:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/img/honza.jpg",  cc:"jan.trojacek@czechinvest.gov.cz",      book:"https://outlook.office.com/book/DefenceHubCzechInvestinfomeeting@czechinvest.onmicrosoft.com/s/Dp663Eyji0SmN4PHpOxTwQ2"}
   },
   // Kdo je kdy kde (osobní klíčenky): akce se doplní do předmětu mailu podle dnešního data.
   // Datum včetně obou krajů, formát RRRR-MM-DD. Názvy bez diakritiky a bez svislítka.
@@ -371,8 +380,11 @@ window.DH=(function(){
   }
   function apply(l){
     var d=(l==='en')?'en':'cs', t=(window.DH_I18N||{})[d]||{};
+    // rozdávací klíčenka (bez who): jen rozcestník, kontaktní karty skryté
+    if(!who){ ['linkVcf','linkMail','consent'].forEach(function(id){ var el=document.getElementById(id); if(el) el.style.display='none'; }); }
     // vizitka
     var a=document.getElementById('linkVcf'); a.href=person.vcf;
+    if(person.photo){ var ic=a.querySelector('.icon'); if(ic){ var im=document.createElement('img'); im.className='avatar'; im.alt=''; im.src=person.photo; im.onload=function(){ ic.replaceWith(im); }; } }
     a.querySelector('b').textContent=t.vcf_t||'';
     a.querySelector('small').textContent= who ? (person.name+(person.title[d]?', '+person.title[d]:'')) : (t.vcf_d_dh||'');
     // mailto
@@ -392,6 +404,7 @@ window.DH=(function(){
     btn.href=person.vcf;
     var parts=person.name.split(' '); document.getElementById('vcInit').textContent=(who? (parts[0].charAt(0)+(parts[1]?parts[1].charAt(0):'')) : 'DH').toUpperCase();
     document.getElementById('vcName').textContent=person.name;
+    if(person.photo){ var ph=document.getElementById('vcPhoto'); ph.onload=function(){ ph.hidden=false; document.getElementById('vcInit').style.display='none'; }; ph.src=person.photo; }
     function hide(){ ov.classList.remove('show'); }
     skip.addEventListener('click',hide);
     btn.addEventListener('click',function(){ setTimeout(hide,1500); });
@@ -417,7 +430,8 @@ window.DH=(function(){
       ev_href:"https://defencehub.gov.cz/akce/",
       nato_t:"NATO DIANA", nato_d:"Akcelerátor NATO pro dual-use technologie v Česku",
       nato_href:"https://defencehub.gov.cz/nato-diana/",
-      db_t:"Databáze řešení", db_d:"Zapište svou firmu, buďte vidět pro armádu i partnery",
+      dbb_t:"Databáze řešení", dbb_d:"Prohlédněte si české dual-use firmy a jejich řešení", dbb_href:"https://defencehub.gov.cz/databaze-reseni/",
+      db_t:"Zapsat firmu do databáze", db_d:"Formulář pro firmy, buďte vidět pro armádu i partnery",
       in_t:"LinkedIn", in_d:"Novinky, akce a příběhy z komunity",
       wa_t:"WhatsApp komunita", wa_d:"Přidejte se, rychlé info a networking",
       vc_btn:"Uložit do kontaktů", vc_skip:"Pokračovat na rozcestník",
@@ -438,7 +452,8 @@ window.DH=(function(){
       ev_href:"https://defencehub.gov.cz/events/",
       nato_t:"NATO DIANA", nato_d:"NATO's accelerator for dual-use technology in Czechia",
       nato_href:"https://defencehub.gov.cz/nato-diana-en/",
-      db_t:"Solutions Database", db_d:"Register your company, get seen by the armed forces and partners",
+      dbb_t:"Solutions Database", dbb_d:"Browse Czech dual-use companies and their solutions", dbb_href:"https://defencehub.gov.cz/solutions-database/",
+      db_t:"Add your company", db_d:"Registration form, get seen by the armed forces and partners",
       in_t:"LinkedIn", in_d:"News, events and stories from the community",
       wa_t:"WhatsApp Community", wa_d:"Join us, quick updates and networking",
       vc_btn:"Save to contacts", vc_skip:"Continue to links",
@@ -459,6 +474,7 @@ window.DH=(function(){
     document.getElementById('linkBook').href=d.book_href;
     document.getElementById('linkEvents').href=d.ev_href;
     document.getElementById('linkDiana').href=d.nato_href;
+    document.getElementById('linkDbBrowse').href=d.dbb_href;
     window.DH.apply(l);
     var replay=document.getElementById('replay');
     replay.setAttribute('aria-label',d.replay); replay.title=(l==='en')?'Launch again 🚀':'Znovu odpálit 🚀';
