@@ -1,4 +1,4 @@
-<!-- Defence Hub rozcestník, blok Vlastní HTML pro WordPress (stránka Little Secret, ID 330, šablona dh-blank). Generováno z index.html, verze 16. 9. 2026. V JS nesmí být znak ampersand (WordPress ho přepisuje). -->
+<!-- Defence Hub rozcestník, blok Vlastní HTML pro WordPress (stránka Little Secret, ID 330, šablona dh-blank). Generováno z index.html, verze 16. 9. 2026 v2.1 (overlay vizitky). V JS nesmí být znak ampersand (WordPress ho přepisuje). -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -162,6 +162,18 @@ header.reveal{animation-delay:1.4s}
 .link:nth-child(10){animation-delay:2.55s}
 footer.reveal{animation-delay:2.7s}
 
+/* ---------- overlay vizitky (go=vcard) ---------- */
+#vcOverlay{position:fixed;inset:0;z-index:70;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(6,12,30,.82);backdrop-filter:blur(6px)}
+#vcOverlay.show{display:flex}
+.vcCard{width:100%;max-width:380px;background:#13234E;border:1px solid rgba(255,255,255,.14);border-radius:22px;padding:28px 22px 20px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.vcInit{width:72px;height:72px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;background:rgba(140,170,114,.25);color:#CFE0BC;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;letter-spacing:.02em}
+.vcName{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;margin:0 0 4px}
+.vcTitle{color:var(--muted);font-size:13.5px;margin:0 0 6px}
+.vcOrg{color:#9FBAF0;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;margin:0 0 20px}
+.vcBtn{display:block;width:100%;padding:16px;border-radius:14px;background:var(--green);color:#0B1530;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;text-decoration:none;border:none}
+.vcBtn:active{transform:translateY(1px)}
+.vcSkip{display:block;width:100%;margin-top:10px;padding:12px;border-radius:14px;background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,.12);font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:14px;cursor:pointer}
+
 @media (prefers-reduced-motion: reduce){
   #rocketWrap{display:none}
   .reveal{opacity:1;transform:none;animation:none}
@@ -198,6 +210,17 @@ footer.reveal{animation-delay:2.7s}
     <path d="M15.5 26C11.5 28.4 9.5 32 9 37c3.4-.6 6.2-2 8.4-4.2A29 29 0 0 1 15.5 26Z" fill="#6E9152"/>
     <path d="M32.5 26c4 2.4 6 6 6.5 11-3.4-.6-6.2-2-8.4-4.2A29 29 0 0 0 32.5 26Z" fill="#6E9152"/>
   </svg>
+</div>
+
+<div id="vcOverlay" role="dialog" aria-modal="true" aria-labelledby="vcName">
+  <div class="vcCard">
+    <div class="vcInit" id="vcInit" aria-hidden="true">DH</div>
+    <p class="vcName" id="vcName"></p>
+    <p class="vcTitle" id="vcTitle"></p>
+    <p class="vcOrg">Defence Hub CzechInvest</p>
+    <a class="vcBtn" id="vcBtn" href="#" data-i18n="vc_btn">Uložit do kontaktů</a>
+    <button type="button" class="vcSkip" id="vcSkip" data-i18n="vc_skip">Pokračovat na rozcestník</button>
+  </div>
 </div>
 
 <div class="wrap">
@@ -352,11 +375,22 @@ window.DH=(function(){
       +'\u0026body='+encodeURIComponent(t.body||'');
     if(who){ if(person.cc) m+='\u0026cc='+encodeURIComponent(person.cc); }
     document.getElementById('linkMail').href=m;
+    var vt=document.getElementById('vcTitle'); if(vt) vt.textContent= who ? (person.title[d]||'') : (t.vcf_d_dh||'');
     // osobní klíčenka: konzultace přímo s daným člověkem
     if(who){ if(person.book) document.getElementById('linkBook').href=person.book; }
   }
-  // go=vcard: rovnou nabídnout vizitku (po animaci); když to prohlížeč zablokuje, zůstává karta nahoře
-  if((q.go||'')==='vcard'){ window.addEventListener('load',function(){ setTimeout(function(){ try{ location.href=person.vcf; }catch(e){} }, 900); }); }
+  // go=vcard: přes rozcestník se zobrazí velká karta s jedním tlačítkem (Safari nepustí otevření souboru bez klepnutí uživatele)
+  if((q.go||'')==='vcard'){
+    var ov=document.getElementById('vcOverlay'), skip=document.getElementById('vcSkip'), btn=document.getElementById('vcBtn');
+    btn.href=person.vcf;
+    var parts=person.name.split(' '); document.getElementById('vcInit').textContent=(who? (parts[0].charAt(0)+(parts[1]?parts[1].charAt(0):'')) : 'DH').toUpperCase();
+    document.getElementById('vcName').textContent=person.name;
+    function hide(){ ov.classList.remove('show'); }
+    skip.addEventListener('click',hide);
+    btn.addEventListener('click',function(){ setTimeout(hide,1500); });
+    ov.addEventListener('click',function(e){ if(e.target===ov) hide(); });
+    setTimeout(function(){ ov.classList.add('show'); }, 700);
+  }
   return {apply:apply, who:who, eventFor:eventFor};
 })();
 
@@ -379,6 +413,7 @@ window.DH=(function(){
       db_t:"Databáze řešení", db_d:"Zapište svou firmu, buďte vidět pro armádu i partnery",
       in_t:"LinkedIn", in_d:"Novinky, akce a příběhy z komunity",
       wa_t:"WhatsApp komunita", wa_d:"Přidejte se, rychlé info a networking",
+      vc_btn:"Uložit do kontaktů", vc_skip:"Pokračovat na rozcestník",
       subject:"Kontakt", team:"tym",
       body:"Dobrý den,\nrád/a zůstanu v kontaktu s Defence Hubem CzechInvest.\nPokud nejsou v podpisu, doplňte prosím firmu a telefon:\n\nFirma: \nTelefon: \n",
       replay:"Přehrát animaci rakety znovu", nav:"Odkazy Defence Hub"
@@ -399,6 +434,7 @@ window.DH=(function(){
       db_t:"Solutions Database", db_d:"Register your company, get seen by the armed forces and partners",
       in_t:"LinkedIn", in_d:"News, events and stories from the community",
       wa_t:"WhatsApp Community", wa_d:"Join us, quick updates and networking",
+      vc_btn:"Save to contacts", vc_skip:"Continue to links",
       subject:"Contact", team:"team",
       body:"Hello,\nI would like to stay in touch with Defence Hub CzechInvest.\nIf not in your signature, please add your company and phone:\n\nCompany: \nPhone: \n",
       replay:"Replay the rocket animation", nav:"Defence Hub links"
