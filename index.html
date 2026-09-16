@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Defence Hub</title>
-<meta name="description" content="Defence Hub — národní brána defence & dual-use inovací. Web, aplikace, LinkedIn, databáze řešení a komunita na jednom místě.">
+<meta name="description" content="Defence Hub CzechInvest: národní brána defence a dual-use inovací. Kontakt, konzultace, akce, databáze řešení a komunita na jednom místě.">
 <meta name="theme-color" content="#0B1530">
 <meta property="og:title" content="Defence Hub">
-<meta property="og:description" content="Národní brána defence & dual-use inovací — všechny odkazy na jednom místě.">
+<meta property="og:description" content="Národní brána defence a dual-use inovací. Všechny odkazy na jednom místě.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🚀%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,7 +32,7 @@ body{
   overflow-x:hidden;
 }
 ::selection{background:var(--blue);color:#fff}
-/* gradient jako fixní vrstva — background-attachment:fixed na iOS nefunguje */
+/* gradient jako fixní vrstva, background-attachment:fixed na iOS nefunguje */
 body::before{
   content:"";position:fixed;inset:0;z-index:-1;
   background:radial-gradient(130% 100% at 20% 0%, #1B2D5E 0%, #0E1B3C 55%, #0B1530 100%);
@@ -155,7 +155,22 @@ header.reveal{animation-delay:1.4s}
 .link:nth-child(3){animation-delay:1.85s}
 .link:nth-child(4){animation-delay:1.95s}
 .link:nth-child(5){animation-delay:2.05s}
-footer.reveal{animation-delay:2.25s}
+.i-vcf{background:rgba(140,170,114,.28);color:#CFE0BC}
+.i-mail{background:rgba(43,92,196,.34);color:#B7CCF5}
+.i-book{background:rgba(234,217,168,.16);color:#EAD9A8}
+.i-ev{background:rgba(140,170,242,.16);color:#C9D8F2}
+.i-nato{background:rgba(43,92,196,.28);color:#9FBAF0}
+.link.person{border-color:rgba(140,170,114,.55);background:rgba(140,170,114,.12)}
+.link.person:hover{background:rgba(140,170,114,.18)}
+.avatar{flex:none;width:44px;height:44px;border-radius:12px;object-fit:cover;background:rgba(255,255,255,.08)}
+.consent{color:#5E6E96;font-size:11px;line-height:1.45;margin:-2px 4px 4px;text-align:center}
+.consent a{color:#8FA0C6}
+.link:nth-child(6){animation-delay:2.15s}
+.link:nth-child(7){animation-delay:2.25s}
+.link:nth-child(8){animation-delay:2.35s}
+.link:nth-child(9){animation-delay:2.45s}
+.link:nth-child(10){animation-delay:2.55s}
+footer.reveal{animation-delay:2.7s}
 
 @media (prefers-reduced-motion: reduce){
   #rocketWrap{display:none}
@@ -214,45 +229,66 @@ footer.reveal{animation-delay:2.25s}
   </header>
 
   <nav aria-label="Odkazy Defence Hub">
-    <a class="link reveal" id="linkWeb" href="https://defencehub.gov.cz/" target="_blank" rel="noopener">
-      <span class="icon i-web" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></svg>
-      </span>
-      <span><b data-i18n="web_t">Web Defence Hub</b><small data-i18n="web_d">defencehub.gov.cz — vše o nás na jednom místě</small></span>
+    <a class="link reveal person" id="linkVcf" href="https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/dh.vcf" download>
+      <span class="icon i-vcf" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/><path d="M19 3v4M17 5h4"/></svg></span>
+      <span><b data-i18n="vcf_t">Uložit kontakt</b><small data-i18n="vcf_d">Defence Hub CzechInvest do vašich kontaktů</small></span>
       <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
     </a>
 
-    <a class="link reveal" href="https://nadinensmark-bot.github.io/hub/navigator/" target="_blank" rel="noopener">
-      <span class="icon i-app" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5 13.7 13.7 8.5 15.5l1.8-5.2 5.2-1.8Z"/></svg>
-      </span>
-      <span><b data-i18n="app_t">DH Kompas — demo</b><small data-i18n="app_d">Průvodce programy a financováním pro startupy</small></span>
+    <a class="link reveal hi" id="linkMail" href="#" >
+      <span class="icon i-mail" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+      <span><b data-i18n="mail_t">Pošlete nám svůj kontakt</b><small data-i18n="mail_d">Otevře e-mail, stačí odeslat. Nic nepíšete.</small></span>
+      <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+    </a>
+    <p class="consent" id="consent" data-i18n="consent">Odesláním souhlasíte, že vás Defence Hub CzechInvest může kontaktovat.</p>
+
+    <a class="link reveal " id="linkBook" href="https://defencehub.gov.cz/konzultace/" target="_blank" rel="noopener">
+      <span class="icon i-book" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="m9 15 2 2 4-4"/></svg></span>
+      <span><b data-i18n="book_t">Domluvit konzultaci</b><small data-i18n="book_d">30 minut online, 8 témat, termín si vyberete sami</small></span>
       <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
     </a>
 
-    <a class="link reveal" href="https://www.linkedin.com/company/defence-hub-czechinvest/" target="_blank" rel="noopener">
-      <span class="icon i-in" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5ZM.24 8.31h4.52V23H.24V8.31Zm7.44 0h4.33v2h.06c.6-1.14 2.08-2.34 4.28-2.34 4.58 0 5.42 3.01 5.42 6.93V23h-4.51v-7.13c0-1.7-.03-3.89-2.37-3.89-2.37 0-2.73 1.85-2.73 3.76V23H7.68V8.31Z"/></svg>
-      </span>
+    <a class="link reveal " id="linkWeb" href="https://defencehub.gov.cz/" target="_blank" rel="noopener">
+      <span class="icon i-web" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></svg></span>
+      <span><b data-i18n="web_t">Web Defence Hub</b><small data-i18n="web_d">defencehub.gov.cz, vše o nás na jednom místě</small></span>
+      <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+    </a>
+
+    <a class="link reveal " id="linkEvents" href="https://defencehub.gov.cz/akce/" target="_blank" rel="noopener">
+      <span class="icon i-ev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="8.5" cy="15" r="1"/><circle cx="12" cy="15" r="1"/><circle cx="15.5" cy="15" r="1"/></svg></span>
+      <span><b data-i18n="ev_t">Akce</b><small data-i18n="ev_d">Kalendář defence a dual-use akcí v ČR i ve světě</small></span>
+      <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+    </a>
+
+    <a class="link reveal " id="linkDiana" href="https://defencehub.gov.cz/nato-diana/" target="_blank" rel="noopener">
+      <span class="icon i-nato" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 7v5c0 5 3.5 8.5 8 9 4.5-.5 8-4 8-9V7l-8-4Z"/><path d="M12 8v4l3 2"/></svg></span>
+      <span><b data-i18n="nato_t">NATO DIANA</b><small data-i18n="nato_d">Akcelerátor NATO pro dual-use technologie v Česku</small></span>
+      <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+    </a>
+
+    <a class="link reveal " id="linkDb" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=q8gL-se0sUOvIxgC0ZUHltmg99bB9nRNljlL-s5gE0FUM1pDSzBTRUhXSzNFMjJSUkZKSUZXNkhTWC4u" target="_blank" rel="noopener">
+      <span class="icon i-db" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12v7c0 1.66 3.58 3 8 3s8-1.34 8-3v-7"/></svg></span>
+      <span><b data-i18n="db_t">Databáze řešení</b><small data-i18n="db_d">Zapište svou firmu, buďte vidět pro armádu i partnery</small></span>
+      <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+    </a>
+
+    <a class="link reveal " id="linkIn" href="https://www.linkedin.com/company/defence-hub-czechinvest/" target="_blank" rel="noopener">
+      <span class="icon i-in" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5ZM.24 8.31h4.52V23H.24V8.31Zm7.44 0h4.33v2h.06c.6-1.14 2.08-2.34 4.28-2.34 4.58 0 5.42 3.01 5.42 6.93V23h-4.51v-7.13c0-1.7-.03-3.89-2.37-3.89-2.37 0-2.73 1.85-2.73 3.76V23H7.68V8.31Z"/></svg></span>
       <span><b data-i18n="in_t">LinkedIn</b><small data-i18n="in_d">Novinky, akce a příběhy z komunity</small></span>
       <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
     </a>
 
-    <a class="link reveal hi" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=q8gL-se0sUOvIxgC0ZUHltmg99bB9nRNljlL-s5gE0FUM1pDSzBTRUhXSzNFMjJSUkZKSUZXNkhTWC4u" target="_blank" rel="noopener">
-      <span class="icon i-db" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12v7c0 1.66 3.58 3 8 3s8-1.34 8-3v-7"/></svg>
-      </span>
-      <span><b data-i18n="db_t">Databáze řešení</b><small data-i18n="db_d">Zapište svou firmu — buďte vidět pro armádu i partnery</small></span>
+    <!-- WhatsApp komunita skryta, rozhodnutí Nadine 16. 9. 2026
+    <a class="link reveal " id="linkWa" href="https://chat.whatsapp.com/Bns0ArwcKu9I1H6PNNOF6y?mode=gi_t" target="_blank" rel="noopener">
+      <span class="icon i-wa" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a9.9 9.9 0 0 0-8.51 15.07L2 22l5.09-1.44A9.94 9.94 0 1 0 12 2Zm0 18.1a8.06 8.06 0 0 1-4.1-1.12l-.3-.18-3.02.85.86-2.94-.2-.31A8.1 8.1 0 1 1 12 20.1Zm4.56-6.03c-.25-.13-1.47-.73-1.7-.81-.23-.08-.4-.13-.56.12-.17.25-.64.81-.79.98-.14.17-.29.19-.54.06a6.6 6.6 0 0 1-3.3-2.88c-.25-.43.25-.4.71-1.32.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.44.06-.66.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.57.13.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.28Z"/></svg></span>
+      <span><b data-i18n="wa_t">WhatsApp komunita</b><small data-i18n="wa_d">Přidejte se, rychlé info a networking</small></span>
       <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
     </a>
+    -->
 
-    <a class="link reveal" href="https://chat.whatsapp.com/Bns0ArwcKu9I1H6PNNOF6y?mode=gi_t" target="_blank" rel="noopener">
-      <span class="icon i-wa" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a9.9 9.9 0 0 0-8.51 15.07L2 22l5.09-1.44A9.94 9.94 0 1 0 12 2Zm0 18.1a8.06 8.06 0 0 1-4.1-1.12l-.3-.18-3.02.85.86-2.94-.2-.31A8.1 8.1 0 1 1 12 20.1Zm4.56-6.03c-.25-.13-1.47-.73-1.7-.81-.23-.08-.4-.13-.56.12-.17.25-.64.81-.79.98-.14.17-.29.19-.54.06a6.6 6.6 0 0 1-3.3-2.88c-.25-.43.25-.4.71-1.32.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.44.06-.66.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.57.13.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.28Z"/></svg>
-      </span>
-      <span><b data-i18n="wa_t">WhatsApp komunita</b><small data-i18n="wa_d">Přidejte se — rychlé info a networking</small></span>
-      <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
-    </a>
+    <!-- DH Kompas (demo) dočasně skryto, rozhodnutí Nadine 16. 9. 2026
+    <a class="link reveal" href="https://nadinensmark-bot.github.io/hub/navigator/" target="_blank" rel="noopener"> ... DH Kompas ... </a>
+    -->
   </nav>
 
   <footer class="reveal">Defence Hub · CzechInvest</footer>
@@ -275,30 +311,112 @@ footer.reveal{animation-delay:2.25s}
   }
 })();
 
-// jazyky CZ/EN — auto podle prohlížeče, volba se pamatuje
+// ================= KONFIGURACE (jediné místo, které se edituje) =================
+// Klíčenky: osobní = ?who=nadine (volitelně &go=vcard), rozdávací = bez parametrů.
+var DH_CONFIG = {
+  collector: "nada.sokolova@czechinvest.gov.cz",   // sběrná schránka (Power Automate → Excel)
+  team: {
+    dh:     {name:"Defence Hub CzechInvest", title:{cs:"",en:""}, vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/dh.vcf", cc:null, book:null},
+    nadine: {name:"Nadine Sokolová",   title:{cs:"Marketing, programy a partnerství",en:"Marketing, Programmes & Partnerships"}, vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/nadine.vcf", cc:"nada.sokolova@czechinvest.gov.cz",     book:"https://outlook.office.com/book/DefenceHubCzechInvestinfomeeting@czechinvest.onmicrosoft.com/s/Crb3WpYvn0Ob9AYq4nu6jA2"},
+    leos:   {name:"Leoš Mauer",        title:{cs:"Ředitel Defence Hubu",en:"Director, Defence Hub"},                       vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/leos.vcf",   cc:"leos.mauer@czechinvest.gov.cz",        book:"https://outlook.office.com/book/DefenceHubCzechInvestinfomeeting@czechinvest.onmicrosoft.com/s/kf5KjE70I0Se9EdfDZmOiQ2"},
+    katka:  {name:"Kateřina Nováková", title:{cs:"Investoři a startupy",en:"Investors & Startups"},                         vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/katka.vcf",  cc:"katerina.novakova@czechinvest.gov.cz", book:"https://outlook.office.com/book/DefenceHubCzechInvestinfomeeting@czechinvest.onmicrosoft.com/s/7uDYKplQTki2QobQKrz9Mg2"},
+    martin: {name:"Martin Hýža",       title:{cs:"NATO DIANA akcelerátor",en:"NATO DIANA Accelerator"},                     vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/martin.vcf", cc:"martin.hyza@czechinvest.gov.cz",       book:"https://outlook.office.com/book/DefenceHubCzechInvestinfomeeting@czechinvest.onmicrosoft.com/s/SGn51imIe0qL3dZMo9AGwQ2"},
+    honza:  {name:"Jan Trojáček",      title:{cs:"Mentoring a komunita",en:"Mentoring & Community"},                        vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/honza.vcf",  cc:"jan.trojacek@czechinvest.gov.cz",      book:"https://outlook.office.com/book/DefenceHubCzechInvestinfomeeting@czechinvest.onmicrosoft.com/s/Dp663Eyji0SmN4PHpOxTwQ2"}
+  },
+  // Kdo je kdy kde (osobní klíčenky): akce se doplní do předmětu mailu podle dnešního data.
+  // Datum včetně obou krajů, formát RRRR-MM-DD. Názvy bez diakritiky a bez svislítka.
+  // Zdroj termínů: Nadine 16. 9. 2026. Nová akce = nový řádek, den před akcí. Bez shody = "neurceno".
+  events: [
+    {from:"2026-09-16", to:"2026-09-17", who:["nadine","leos"],          event:"IISS"},
+    {from:"2026-09-18", to:"2026-09-18", who:["nadine","leos"],          event:"6. vyzbrojovaci konference"},
+    {from:"2026-09-19", to:"2026-09-19", who:["nadine","leos"],          event:"Dny NATO Ostrava"},
+    {from:"2026-09-19", to:"2026-09-20", who:["katka"],                  event:"Dny NATO Ostrava"},
+    {from:"2026-09-21", to:"2026-09-25", who:["katka","martin","honza"], event:"DRONESHIELD Vyskov"},
+    {from:"2026-09-21", to:"2026-09-26", who:["nadine","leos"],          event:"Estonian Defence Week Tallinn"},
+    {from:"2026-09-28", to:"2026-10-02", who:["nadine","leos"],          event:"DRONESHIELD Vyskov"},
+    {from:"2026-10-04", to:"2026-10-07", who:["nadine","leos"],          event:"Resilience konference Londyn"},
+    {from:"2026-10-08", to:"2026-10-08", who:["nadine","leos"],          event:"DRONEDGE"}
+  ]
+};
+// ================================================================================
+
+window.DH=(function(){
+  var q={}; try{ location.search.replace(/^\?/,'').split('&').forEach(function(p){ if(!p) return; var kv=p.split('='); q[decodeURIComponent(kv[0])]=decodeURIComponent(kv[1]||''); }); }catch(e){}
+  var who=(q.who||'').toLowerCase(); if(!DH_CONFIG.team[who]||who==='dh') who='';
+  var person=DH_CONFIG.team[who||'dh'];
+  function today(){ var d=new Date(), m=d.getMonth()+1, day=d.getDate(); return d.getFullYear()+'-'+(m<10?'0':'')+m+'-'+(day<10?'0':'')+day; }
+  function eventFor(w){
+    if(!w) return 'klicenka';
+    var t=today(), hit=null;
+    DH_CONFIG.events.forEach(function(e){ if(!hit && e.from<=t && t<=e.to && e.who.indexOf(w)>=0) hit=e; });
+    return hit?hit.event:'neurceno';
+  }
+  function apply(l){
+    var d=(l==='en')?'en':'cs', t=(window.DH_I18N||{})[d]||{};
+    // vizitka
+    var a=document.getElementById('linkVcf'); a.href=person.vcf;
+    a.querySelector('b').textContent=t.vcf_t||'';
+    a.querySelector('small').textContent= who ? (person.name+(person.title[d]?', '+person.title[d]:'')) : (t.vcf_d_dh||'');
+    // mailto
+    var subject=(t.subject||'Kontakt')+' | '+eventFor(who)+' | '+(who?person.name:(t.team||'tym'));
+    var m='mailto:'+encodeURIComponent(DH_CONFIG.collector)
+      +'?subject='+encodeURIComponent(subject)
+      +'&body='+encodeURIComponent(t.body||'');
+    if(who && person.cc) m+='&cc='+encodeURIComponent(person.cc);
+    document.getElementById('linkMail').href=m;
+    // osobní klíčenka: konzultace přímo s daným člověkem
+    if(who && person.book) document.getElementById('linkBook').href=person.book;
+  }
+  // go=vcard: rovnou nabídnout vizitku (po animaci); když to prohlížeč zablokuje, zůstává karta nahoře
+  if((q.go||'')==='vcard'){ window.addEventListener('load',function(){ setTimeout(function(){ try{ location.href=person.vcf; }catch(e){} }, 900); }); }
+  return {apply:apply, who:who, eventFor:eventFor};
+})();
+
+// jazyky CZ/EN: auto podle prohlížeče, volba se pamatuje
 (function(){
   var I18N = {
     cs: {
-      tagline:"Národní brána defence & dual-use inovací. Všechno důležité na jeden dotek.",
-      web_t:"Web Defence Hub", web_d:"defencehub.gov.cz — vše o nás na jednom místě",
+      tagline:"Národní brána defence a dual-use inovací. Všechno důležité na jeden dotek.",
+      vcf_t:"Uložit kontakt", vcf_d_dh:"Defence Hub CzechInvest do vašich kontaktů",
+      mail_t:"Pošlete nám svůj kontakt", mail_d:"Otevře e-mail, stačí odeslat. Nic nepíšete.",
+      consent:"Odesláním souhlasíte, že vás Defence Hub CzechInvest může kontaktovat.",
+      book_t:"Domluvit konzultaci", book_d:"30 minut online, 8 témat, termín si vyberete sami",
+      book_href:"https://defencehub.gov.cz/konzultace/",
+      web_t:"Web Defence Hub", web_d:"defencehub.gov.cz, vše o nás na jednom místě",
       web_href:"https://defencehub.gov.cz/",
-      app_t:"DH Kompas — demo", app_d:"Průvodce programy a financováním pro startupy",
+      ev_t:"Akce", ev_d:"Kalendář defence a dual-use akcí v ČR i ve světě",
+      ev_href:"https://defencehub.gov.cz/akce/",
+      nato_t:"NATO DIANA", nato_d:"Akcelerátor NATO pro dual-use technologie v Česku",
+      nato_href:"https://defencehub.gov.cz/nato-diana/",
+      db_t:"Databáze řešení", db_d:"Zapište svou firmu, buďte vidět pro armádu i partnery",
       in_t:"LinkedIn", in_d:"Novinky, akce a příběhy z komunity",
-      db_t:"Databáze řešení", db_d:"Zapište svou firmu — buďte vidět pro armádu i partnery",
-      wa_t:"WhatsApp komunita", wa_d:"Přidejte se — rychlé info a networking",
+      wa_t:"WhatsApp komunita", wa_d:"Přidejte se, rychlé info a networking",
+      subject:"Kontakt", team:"tym",
+      body:"Dobrý den,\nrád/a zůstanu v kontaktu s Defence Hubem CzechInvest.\nPokud nejsou v podpisu, doplňte prosím firmu a telefon:\n\nFirma: \nTelefon: \n",
       replay:"Přehrát animaci rakety znovu", nav:"Odkazy Defence Hub"
     },
     en: {
-      tagline:"The national gateway for defence & dual-use innovation. Everything that matters, one tap away.",
-      web_t:"Defence Hub website", web_d:"defencehub.gov.cz — everything about us in one place",
+      tagline:"The national gateway for defence and dual-use innovation. Everything that matters, one tap away.",
+      vcf_t:"Save contact", vcf_d_dh:"Defence Hub CzechInvest to your contacts",
+      mail_t:"Send us your contact", mail_d:"Opens an e-mail, just hit send. Nothing to type.",
+      consent:"By sending you agree that Defence Hub CzechInvest may contact you.",
+      book_t:"Book a consultation", book_d:"30 minutes online, 8 topics, pick your own slot",
+      book_href:"https://defencehub.gov.cz/consultation/",
+      web_t:"Defence Hub website", web_d:"defencehub.gov.cz, everything about us in one place",
       web_href:"https://defencehub.gov.cz/defence-hub-en/",
-      app_t:"DH Compass — demo", app_d:"Your guide to programmes and funding for startups",
+      ev_t:"Events", ev_d:"Calendar of defence and dual-use events in Czechia and abroad",
+      ev_href:"https://defencehub.gov.cz/events/",
+      nato_t:"NATO DIANA", nato_d:"NATO's accelerator for dual-use technology in Czechia",
+      nato_href:"https://defencehub.gov.cz/nato-diana-en/",
+      db_t:"Solutions Database", db_d:"Register your company, get seen by the armed forces and partners",
       in_t:"LinkedIn", in_d:"News, events and stories from the community",
-      db_t:"Solutions Database", db_d:"Register your company — get seen by the armed forces and partners",
-      wa_t:"WhatsApp Community", wa_d:"Join us — quick updates and networking",
+      wa_t:"WhatsApp Community", wa_d:"Join us, quick updates and networking",
+      subject:"Contact", team:"team",
+      body:"Hello,\nI would like to stay in touch with Defence Hub CzechInvest.\nIf not in your signature, please add your company and phone:\n\nCompany: \nPhone: \n",
       replay:"Replay the rocket animation", nav:"Defence Hub links"
     }
   };
+  window.DH_I18N=I18N;
   var btnCs=document.getElementById('langCs'), btnEn=document.getElementById('langEn');
   function setLang(l){
     var d=I18N[l]||I18N.cs;
@@ -307,6 +425,10 @@ footer.reveal{animation-delay:2.25s}
       var t=d[el.getAttribute('data-i18n')]; if(t) el.textContent=t;
     });
     document.getElementById('linkWeb').href=d.web_href;
+    document.getElementById('linkBook').href=d.book_href;
+    document.getElementById('linkEvents').href=d.ev_href;
+    document.getElementById('linkDiana').href=d.nato_href;
+    window.DH.apply(l);
     var replay=document.getElementById('replay');
     replay.setAttribute('aria-label',d.replay); replay.title=(l==='en')?'Launch again 🚀':'Znovu odpálit 🚀';
     document.querySelector('nav').setAttribute('aria-label',d.nav);
