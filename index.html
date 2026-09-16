@@ -312,16 +312,16 @@ footer.reveal{animation-delay:2.7s}
 })();
 
 // ================= KONFIGURACE (jediné místo, které se edituje) =================
-// Klíčenky: osobní = ?who=nadine (volitelně &go=vcard), rozdávací = bez parametrů.
+// Klíčenky: osobní = ?who=nadine (volitelně go=vcard), rozdávací = bez parametrů. POZOR: v JS nepoužívat znak ampersand, WordPress ho přepisuje.
 var DH_CONFIG = {
-  collector: "nada.sokolova@czechinvest.gov.cz",   // sběrná schránka (Power Automate → Excel)
+  collector: "nada.sokolova@czechinvest.gov.cz",   // sběrná schránka (Power Automate, Excel)
   team: {
     dh:     {name:"Defence Hub CzechInvest", title:{cs:"",en:""}, vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/dh.vcf", cc:null, book:null},
-    nadine: {name:"Nadine Sokolová",   title:{cs:"Marketing, programy a partnerství",en:"Marketing, Programmes & Partnerships"}, vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/nadine.vcf", cc:"nada.sokolova@czechinvest.gov.cz",     book:"https://outlook.office.com/book/DefenceHubCzechInvestinfomeeting@czechinvest.onmicrosoft.com/s/Crb3WpYvn0Ob9AYq4nu6jA2"},
+    nadine: {name:"Nadine Sokolová",   title:{cs:"Marketing, programy a partnerství",en:"Marketing, Programmes \u0026 Partnerships"}, vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/nadine.vcf", cc:"nada.sokolova@czechinvest.gov.cz",     book:"https://outlook.office.com/book/DefenceHubCzechInvestinfomeeting@czechinvest.onmicrosoft.com/s/Crb3WpYvn0Ob9AYq4nu6jA2"},
     leos:   {name:"Leoš Mauer",        title:{cs:"Ředitel Defence Hubu",en:"Director, Defence Hub"},                       vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/leos.vcf",   cc:"leos.mauer@czechinvest.gov.cz",        book:"https://outlook.office.com/book/DefenceHubCzechInvestinfomeeting@czechinvest.onmicrosoft.com/s/kf5KjE70I0Se9EdfDZmOiQ2"},
-    katka:  {name:"Kateřina Nováková", title:{cs:"Investoři a startupy",en:"Investors & Startups"},                         vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/katka.vcf",  cc:"katerina.novakova@czechinvest.gov.cz", book:"https://outlook.office.com/book/DefenceHubCzechInvestinfomeeting@czechinvest.onmicrosoft.com/s/7uDYKplQTki2QobQKrz9Mg2"},
+    katka:  {name:"Kateřina Nováková", title:{cs:"Investoři a startupy",en:"Investors \u0026 Startups"},                         vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/katka.vcf",  cc:"katerina.novakova@czechinvest.gov.cz", book:"https://outlook.office.com/book/DefenceHubCzechInvestinfomeeting@czechinvest.onmicrosoft.com/s/7uDYKplQTki2QobQKrz9Mg2"},
     martin: {name:"Martin Hýža",       title:{cs:"NATO DIANA akcelerátor",en:"NATO DIANA Accelerator"},                     vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/martin.vcf", cc:"martin.hyza@czechinvest.gov.cz",       book:"https://outlook.office.com/book/DefenceHubCzechInvestinfomeeting@czechinvest.onmicrosoft.com/s/SGn51imIe0qL3dZMo9AGwQ2"},
-    honza:  {name:"Jan Trojáček",      title:{cs:"Mentoring a komunita",en:"Mentoring & Community"},                        vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/honza.vcf",  cc:"jan.trojacek@czechinvest.gov.cz",      book:"https://outlook.office.com/book/DefenceHubCzechInvestinfomeeting@czechinvest.onmicrosoft.com/s/Dp663Eyji0SmN4PHpOxTwQ2"}
+    honza:  {name:"Jan Trojáček",      title:{cs:"Mentoring a komunita",en:"Mentoring \u0026 Community"},                        vcf:"https://nadinensmark-bot.github.io/defencehub-rozcestnik/vcf/honza.vcf",  cc:"jan.trojacek@czechinvest.gov.cz",      book:"https://outlook.office.com/book/DefenceHubCzechInvestinfomeeting@czechinvest.onmicrosoft.com/s/Dp663Eyji0SmN4PHpOxTwQ2"}
   },
   // Kdo je kdy kde (osobní klíčenky): akce se doplní do předmětu mailu podle dnešního data.
   // Datum včetně obou krajů, formát RRRR-MM-DD. Názvy bez diakritiky a bez svislítka.
@@ -341,14 +341,14 @@ var DH_CONFIG = {
 // ================================================================================
 
 window.DH=(function(){
-  var q={}; try{ location.search.replace(/^\?/,'').split('&').forEach(function(p){ if(!p) return; var kv=p.split('='); q[decodeURIComponent(kv[0])]=decodeURIComponent(kv[1]||''); }); }catch(e){}
+  var q={}; try{ location.search.replace(/^\?/,'').split('\u0026').forEach(function(p){ if(!p) return; var kv=p.split('='); q[decodeURIComponent(kv[0])]=decodeURIComponent(kv[1]||''); }); }catch(e){}
   var who=(q.who||'').toLowerCase(); if(!DH_CONFIG.team[who]||who==='dh') who='';
   var person=DH_CONFIG.team[who||'dh'];
   function today(){ var d=new Date(), m=d.getMonth()+1, day=d.getDate(); return d.getFullYear()+'-'+(m<10?'0':'')+m+'-'+(day<10?'0':'')+day; }
   function eventFor(w){
     if(!w) return 'klicenka';
     var t=today(), hit=null;
-    DH_CONFIG.events.forEach(function(e){ if(!hit && e.from<=t && t<=e.to && e.who.indexOf(w)>=0) hit=e; });
+    DH_CONFIG.events.forEach(function(e){ if(!hit){ if(e.from<=t){ if(t<=e.to){ if(e.who.indexOf(w)>=0) hit=e; } } } });
     return hit?hit.event:'neurceno';
   }
   function apply(l){
@@ -361,11 +361,11 @@ window.DH=(function(){
     var subject=(t.subject||'Kontakt')+' | '+eventFor(who)+' | '+(who?person.name:(t.team||'tym'));
     var m='mailto:'+encodeURIComponent(DH_CONFIG.collector)
       +'?subject='+encodeURIComponent(subject)
-      +'&body='+encodeURIComponent(t.body||'');
-    if(who && person.cc) m+='&cc='+encodeURIComponent(person.cc);
+      +'\u0026body='+encodeURIComponent(t.body||'');
+    if(who){ if(person.cc) m+='\u0026cc='+encodeURIComponent(person.cc); }
     document.getElementById('linkMail').href=m;
     // osobní klíčenka: konzultace přímo s daným člověkem
-    if(who && person.book) document.getElementById('linkBook').href=person.book;
+    if(who){ if(person.book) document.getElementById('linkBook').href=person.book; }
   }
   // go=vcard: rovnou nabídnout vizitku (po animaci); když to prohlížeč zablokuje, zůstává karta nahoře
   if((q.go||'')==='vcard'){ window.addEventListener('load',function(){ setTimeout(function(){ try{ location.href=person.vcf; }catch(e){} }, 900); }); }
