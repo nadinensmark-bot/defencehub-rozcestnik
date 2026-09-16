@@ -1,4 +1,4 @@
-<!-- Defence Hub rozcestník, blok Vlastní HTML pro WordPress (stránka Little Secret, ID 330, šablona dh-blank). Generováno z index.html, verze 16. 9. 2026 v2.1 (overlay vizitky). V JS nesmí být znak ampersand (WordPress ho přepisuje). -->
+<!-- Defence Hub rozcestník, blok Vlastní HTML pro WordPress (stránka /nfc/, ID 330, šablona dh-blank). Generováno z index.html, verze 16. 9. 2026 v2.2 (overlay vizitky, jazyk podle akce). V JS nesmí být znak ampersand (WordPress ho přepisuje). -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -337,16 +337,17 @@ var DH_CONFIG = {
   // Kdo je kdy kde (osobní klíčenky): akce se doplní do předmětu mailu podle dnešního data.
   // Datum včetně obou krajů, formát RRRR-MM-DD. Názvy bez diakritiky a bez svislítka.
   // Zdroj termínů: Nadine 16. 9. 2026. Nová akce = nový řádek, den před akcí. Bez shody = "neurceno".
+  // lang = výchozí jazyk stránky na té akci (host si může přepnout). cs = česká akce, en = mezinárodní.
   events: [
-    {from:"2026-09-16", to:"2026-09-17", who:["nadine","leos"],          event:"IISS"},
-    {from:"2026-09-18", to:"2026-09-18", who:["nadine","leos"],          event:"6. vyzbrojovaci konference"},
-    {from:"2026-09-19", to:"2026-09-19", who:["nadine","leos"],          event:"Dny NATO Ostrava"},
-    {from:"2026-09-19", to:"2026-09-20", who:["katka"],                  event:"Dny NATO Ostrava"},
-    {from:"2026-09-21", to:"2026-09-25", who:["katka","martin","honza"], event:"DRONESHIELD Vyskov"},
-    {from:"2026-09-21", to:"2026-09-26", who:["nadine","leos"],          event:"Estonian Defence Week Tallinn"},
-    {from:"2026-09-28", to:"2026-10-02", who:["nadine","leos"],          event:"DRONESHIELD Vyskov"},
-    {from:"2026-10-04", to:"2026-10-07", who:["nadine","leos"],          event:"Resilience konference Londyn"},
-    {from:"2026-10-08", to:"2026-10-08", who:["nadine","leos"],          event:"DRONEDGE"}
+    {from:"2026-09-16", to:"2026-09-17", who:["nadine","leos"],          event:"IISS",                          lang:"en"},
+    {from:"2026-09-18", to:"2026-09-18", who:["nadine","leos"],          event:"6. vyzbrojovaci konference",    lang:"en"},
+    {from:"2026-09-19", to:"2026-09-19", who:["nadine","leos"],          event:"Dny NATO Ostrava",              lang:"cs"},
+    {from:"2026-09-19", to:"2026-09-20", who:["katka"],                  event:"Dny NATO Ostrava",              lang:"cs"},
+    {from:"2026-09-21", to:"2026-09-25", who:["katka","martin","honza"], event:"DRONESHIELD Vyskov",            lang:"cs"},
+    {from:"2026-09-21", to:"2026-09-26", who:["nadine","leos"],          event:"Estonian Defence Week Tallinn", lang:"en"},
+    {from:"2026-09-28", to:"2026-10-02", who:["nadine","leos"],          event:"DRONESHIELD Vyskov",            lang:"cs"},
+    {from:"2026-10-04", to:"2026-10-07", who:["nadine","leos"],          event:"Resilience konference Londyn",  lang:"en"},
+    {from:"2026-10-08", to:"2026-10-08", who:["nadine","leos"],          event:"DRONEDGE",                      lang:"en"}
   ]
 };
 // ================================================================================
@@ -361,6 +362,12 @@ window.DH=(function(){
     var t=today(), hit=null;
     DH_CONFIG.events.forEach(function(e){ if(!hit){ if(e.from<=t){ if(t<=e.to){ if(e.who.indexOf(w)>=0) hit=e; } } } });
     return hit?hit.event:'neurceno';
+  }
+  function eventLang(w){
+    if(!w) return null;
+    var t=today(), hit=null;
+    DH_CONFIG.events.forEach(function(e){ if(!hit){ if(e.from<=t){ if(t<=e.to){ if(e.who.indexOf(w)>=0) hit=e; } } } });
+    return (hit)?(hit.lang||null):null;
   }
   function apply(l){
     var d=(l==='en')?'en':'cs', t=(window.DH_I18N||{})[d]||{};
@@ -391,7 +398,7 @@ window.DH=(function(){
     ov.addEventListener('click',function(e){ if(e.target===ov) hide(); });
     setTimeout(function(){ ov.classList.add('show'); }, 700);
   }
-  return {apply:apply, who:who, eventFor:eventFor};
+  return {apply:apply, who:who, eventFor:eventFor, eventLang:eventLang};
 })();
 
 // jazyky CZ/EN: auto podle prohlížeče, volba se pamatuje
@@ -462,7 +469,8 @@ window.DH=(function(){
   }
   var saved=null; try{saved=localStorage.getItem('dh-lang')}catch(e){}
   var auto=/^(cs|sk)/i.test(navigator.language||'')?'cs':'en';
-  setLang(saved||auto);
+  var evLang=window.DH.eventLang(window.DH.who);
+  setLang(saved||evLang||auto);
   btnCs.addEventListener('click',function(){setLang('cs')});
   btnEn.addEventListener('click',function(){setLang('en')});
 })();

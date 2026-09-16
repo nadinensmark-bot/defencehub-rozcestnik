@@ -11,6 +11,7 @@ Nasazuje se automaticky přes GitHub Actions při každém pushi do `main`.
 ## Klíčenky a parametry (od 16. 9. 2026)
 
 - Karty: Uložit kontakt (vCard) · Pošlete nám kontakt (mailto, chytá Power Automate do Excelu) · Domluvit konzultaci · Web · Akce · NATO DIANA · Databáze řešení · LinkedIn. DH Kompas (demo) a WhatsApp komunita jsou zakomentované.
+- Živě na https://defencehub.gov.cz/nfc/ (stará adresa /little-secret/ přesměrovává, stránka ID 347). Každá akce má `lang` = výchozí jazyk stránky.
 - Osobní klíčenka: `?who=nadine` (`leos`, `katka`, `martin`, `honza`), volitelně `&go=vcard` (rovnou nabídne vizitku).
 - Rozdávací klíčenka: bez parametrů (obecná vizitka DH, předmět mailu `Kontakt | klicenka | tym`).
 - Konfigurace (sběrná schránka, tým, kdo je kdy kde) je v `index.html` v bloku `DH_CONFIG` nahoře ve skriptu. Nic jiného se needituje.
