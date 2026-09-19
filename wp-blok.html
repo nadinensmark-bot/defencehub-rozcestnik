@@ -1,4 +1,4 @@
-<!-- Defence Hub rozcestník, blok Vlastní HTML pro WordPress (stránka /nfc/, ID 330, šablona dh-blank). Generováno z index.html, verze 16. 9. 2026 v2.4 (fotky, vCard CZ/EN, databáze prohlížet/zapsat, programy, rozdávací bez kontaktních karet). V JS nesmí být znak ampersand (WordPress ho přepisuje). -->
+<!-- Defence Hub rozcestník, blok Vlastní HTML pro WordPress (stránka /nfc/, ID 330, šablona dh-blank). Generováno z index.html, verze 19. 9. 2026 v2.5 (mailto adresa bez %40). V JS nesmí být znak ampersand (WordPress ho přepisuje). -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -399,10 +399,10 @@ window.DH=(function(){
     a.querySelector('small').textContent= who ? (person.name+(person.title[d]?', '+person.title[d]:'')) : (t.vcf_d_dh||'');
     // mailto
     var subject=(t.subject||'Kontakt')+' | '+eventFor(who)+' | '+(who?person.name:(t.team||'tym'));
-    var m='mailto:'+encodeURIComponent(DH_CONFIG.collector)
+    var m='mailto:'+DH_CONFIG.collector
       +'?subject='+encodeURIComponent(subject)
       +'\u0026body='+encodeURIComponent(t.body||'');
-    if(who){ if(person.cc) m+='\u0026cc='+encodeURIComponent(person.cc); }
+    if(who){ if(person.cc) m+='\u0026cc='+person.cc; }
     document.getElementById('linkMail').href=m;
     var vt=document.getElementById('vcTitle'); if(vt) vt.textContent= who ? (person.title[d]||'') : (t.vcf_d_dh||'');
     // osobní klíčenka: konzultace přímo s daným člověkem

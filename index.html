@@ -411,10 +411,10 @@ window.DH=(function(){
     a.querySelector('small').textContent= who ? (person.name+(person.title[d]?', '+person.title[d]:'')) : (t.vcf_d_dh||'');
     // mailto
     var subject=(t.subject||'Kontakt')+' | '+eventFor(who)+' | '+(who?person.name:(t.team||'tym'));
-    var m='mailto:'+encodeURIComponent(DH_CONFIG.collector)
+    var m='mailto:'+DH_CONFIG.collector
       +'?subject='+encodeURIComponent(subject)
       +'\u0026body='+encodeURIComponent(t.body||'');
-    if(who){ if(person.cc) m+='\u0026cc='+encodeURIComponent(person.cc); }
+    if(who){ if(person.cc) m+='\u0026cc='+person.cc; }
     document.getElementById('linkMail').href=m;
     var vt=document.getElementById('vcTitle'); if(vt) vt.textContent= who ? (person.title[d]||'') : (t.vcf_d_dh||'');
     // osobní klíčenka: konzultace přímo s daným člověkem
