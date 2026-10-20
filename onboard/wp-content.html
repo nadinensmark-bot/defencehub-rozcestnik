@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bohemia Rhapsody</title>
+<meta name="description" content="Welcome aboard. NATO DIANA Accelerators Summit Prague, 22 October 2026, on the Vltava.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#06101F; --ink2:#030810; --soft:#D6DCE8; --text:#F2F4F8;
+    --muted:#95A2BF; --dim:#5A6A8C; --gold:#E8B04B; --gold2:#F5CB7A; --blue:#7FA3E8;
+    --sp:26px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--ink);color:var(--text);
+    font-family:'Hanken Grotesk',system-ui,-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:var(--gold);text-decoration:none;transition:color .3s}
+  ::selection{background:var(--gold);color:var(--ink)}
+  .wrap{max-width:620px;margin:0 auto;position:relative;overflow:clip;background:var(--ink)}
+
+  /* keyframes */
+  @keyframes kb{0%{transform:scale(1.16) translateY(1.5%)}100%{transform:scale(1) translateY(0)}}
+  @keyframes kbslow{0%{transform:scale(1.02)}100%{transform:scale(1.14)}}
+  @keyframes lightOn{0%{opacity:0;filter:brightness(1.7)}60%{opacity:1;filter:brightness(1.2)}100%{opacity:1;filter:brightness(1)}}
+  @keyframes moon{0%{opacity:0;filter:blur(8px)}100%{opacity:1;filter:blur(0)}}
+  @keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
+  @keyframes fadeUp{0%{opacity:0;transform:translateY(18px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes wordIn{0%{opacity:0;transform:translateY(.4em) skewY(2deg);filter:blur(6px)}100%{opacity:1;transform:none;filter:blur(0)}}
+  @keyframes glint{0%{background-position:200% 0}100%{background-position:-200% 0}}
+  @keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+  @keyframes glowpulse{0%,100%{opacity:.5}50%{opacity:1}}
+
+  /* preloader */
+  #pre{position:fixed;inset:0;z-index:95;background:var(--ink2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;transition:opacity 1s ease .2s}
+  #pre.gone{opacity:0;pointer-events:none}
+  #pre .nm{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:27px;color:var(--text);animation:fadeIn 1.2s .15s both}
+  #pre .ln{width:0;height:1px;background:var(--gold);animation:preln 2.1s .3s cubic-bezier(.3,0,.2,1) both}
+  @keyframes preln{to{width:150px}}
+
+  /* generic scene */
+  .scene{position:relative;min-height:100svh;overflow:hidden;display:flex;isolation:isolate}
+  .scene.end{align-items:flex-end}
+  .scene.center{align-items:center}
+  .scene.flow{min-height:auto;padding-top:14svh;padding-bottom:14svh}
+  .sbg{position:absolute;inset:-14% 0;z-index:-2;background-size:cover;background-position:center;background-color:#0a1526;filter:brightness(.5) saturate(.92);will-change:transform;animation:kbslow 22s ease-out both}
+  .sveil{position:absolute;inset:0;z-index:-1;pointer-events:none}
+  .v-bottom{background:linear-gradient(180deg,rgba(6,16,31,.55) 0%,rgba(6,16,31,.2) 24%,rgba(6,16,31,.35) 48%,rgba(6,16,31,.85) 72%,var(--ink) 94%)}
+  .v-heavy{background:linear-gradient(180deg,var(--ink) 0%,rgba(6,16,31,.86) 30%,rgba(6,16,31,.88) 70%,var(--ink) 100%)}
+  .v-center{background:radial-gradient(130% 85% at 50% 52%,rgba(6,16,31,.38),rgba(6,16,31,.86) 70%,var(--ink) 100%)}
+  .sin{position:relative;z-index:1;width:100%;padding:0 var(--sp)}
+  .onimg .sin::before{content:"";position:absolute;inset:-8% -12%;z-index:-1;background:radial-gradient(120% 92% at 50% 55%,rgba(3,8,16,.88),rgba(3,8,16,.52) 58%,rgba(3,8,16,0) 86%);filter:blur(8px);pointer-events:none}
+
+  /* HERO */
+  .heroImg{position:absolute;inset:0;z-index:-2;will-change:transform}
+  .kbox{position:absolute;inset:0;animation:kb 18s cubic-bezier(.2,.6,.2,1) both;transform-origin:62% 42%}
+  .layer{position:absolute;inset:0;background-image:url('https://nadinensmark-bot.github.io/defencehub-rozcestnik/onboard/assets/hero.jpg');background-size:cover;background-position:58% 50%;background-color:#0a1526}
+  .l-base{filter:brightness(.085) saturate(.45)}
+  .l-moon{-webkit-mask-image:radial-gradient(ellipse 22% 12% at 83% 11%,#000 30%,transparent 100%);mask-image:radial-gradient(ellipse 22% 12% at 83% 11%,#000 30%,transparent 100%);animation:moon 2.4s .3s ease-out both}
+  .l-castle{-webkit-mask-image:radial-gradient(ellipse 34% 11% at 64% 35%,#000 35%,transparent 100%);mask-image:radial-gradient(ellipse 34% 11% at 64% 35%,#000 35%,transparent 100%);animation:lightOn 2.6s 1.3s cubic-bezier(.3,0,.2,1) both}
+  .l-wide{-webkit-mask-image:radial-gradient(ellipse 60% 14% at 55% 40%,#000 30%,transparent 100%);mask-image:radial-gradient(ellipse 60% 14% at 55% 40%,#000 30%,transparent 100%);animation:lightOn 2.4s 2.2s cubic-bezier(.3,0,.2,1) both}
+  .l-bandh{-webkit-mask-image:linear-gradient(to bottom,transparent 40%,#000 49%,#000 60%,transparent 68%);mask-image:linear-gradient(to bottom,transparent 40%,#000 49%,#000 60%,transparent 68%);animation:lightOn 2.2s 3.2s cubic-bezier(.3,0,.2,1) both}
+  .l-full{-webkit-mask-image:linear-gradient(to bottom,transparent 56%,#000 66%);mask-image:linear-gradient(to bottom,transparent 56%,#000 66%);animation:lightOn 2.8s 4.1s cubic-bezier(.3,0,.2,1) both}
+  .glow{position:absolute;inset:0;background:radial-gradient(ellipse 55% 30% at 62% 36%,rgba(232,176,75,.22),rgba(232,176,75,0) 70%);animation:fadeIn 3s 1.8s ease-out both;pointer-events:none}
+  .shimmer{position:absolute;left:0;right:0;top:60%;bottom:0;background:linear-gradient(100deg,transparent 42%,rgba(255,225,160,.10) 50%,transparent 58%);background-size:300% 100%;animation:glint 9s 5s linear infinite;mix-blend-mode:screen;pointer-events:none}
+  .heroTop{position:absolute;top:0;left:0;right:0;padding:max(18px,env(safe-area-inset-top)) var(--sp) 0;display:flex;align-items:center;justify-content:space-between;gap:16px;z-index:2;animation:fadeIn 1.4s .6s both}
+  .heroTop img{height:27px;width:auto}
+  .heroBot{position:relative;z-index:2;width:100%;padding:0 var(--sp) 28px;display:flex;flex-direction:column;gap:22px}
+  .kicker{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:700;animation:fadeUp 1.2s 4.6s both}
+  h1{margin:0;font-size:clamp(40px,11vw,58px);line-height:.93;font-weight:800;letter-spacing:-.025em;text-transform:uppercase;display:flex;flex-wrap:wrap;gap:0 .22em}
+  h1 span{display:inline-block}
+  .ln2{flex-basis:100%;height:0}
+  .fact{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding-top:18px;border-top:1px solid rgba(232,176,75,.30);color:var(--soft);font-size:13px;line-height:1.35;animation:fadeUp 1.2s 6.5s both}
+  .fact .k{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+  .scrollcue{display:flex;align-items:center;gap:10px;animation:fadeIn 1s 7s both}
+  .scrollcue .cbar{width:1px;height:32px;background:var(--gold);animation:cue 2.4s 7s ease-in-out infinite}
+  .scrollcue .ct{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted)}
+
+  /* display type */
+  .eyebrow{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:700}
+  .big{margin:0;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:clamp(40px,12vw,68px);line-height:1.0;letter-spacing:-.01em;text-wrap:balance;text-shadow:0 2px 24px rgba(0,0,0,.85),0 1px 4px rgba(0,0,0,.65)}
+  .huge{margin:0;font-size:clamp(40px,12.5vw,68px);line-height:.92;font-weight:800;letter-spacing:-.03em;text-transform:uppercase}
+  .huge em{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;text-transform:none;letter-spacing:0;font-size:1.1em;color:var(--gold)}
+  .sub{margin:0;font-size:16px;line-height:1.6;color:#EAEFF8;text-shadow:0 1px 16px rgba(0,0,0,.9),0 1px 3px rgba(0,0,0,.7)}
+  .tiny{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+  /* reveal */
+  .rv{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+  .rv.in{opacity:1;transform:none}
+  .d1{transition-delay:.12s}.d2{transition-delay:.24s}.d3{transition-delay:.36s}.d4{transition-delay:.48s}
+  .lit{filter:brightness(1.9) blur(6px);opacity:0;transition:filter 1.2s cubic-bezier(.3,0,.2,1),opacity 1.2s ease}
+  .lit.in{filter:none;opacity:1}
+
+  /* big numbers */
+  .nums{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+  .nums .n{font-size:clamp(44px,15vw,72px);font-weight:800;letter-spacing:-.04em;line-height:1;color:var(--gold)}
+  .nums .c{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:10px;line-height:1.3}
+
+  /* programme */
+  .plist{display:flex;flex-direction:column;margin-top:10px}
+  .pline{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+  .pline:first-child{border-top:1px solid rgba(255,255,255,.08)}
+  .ptime{flex:none;width:96px;font-size:12px;font-variant-numeric:tabular-nums;color:var(--gold);font-weight:700;letter-spacing:.02em;padding-top:4px}
+  .pmid{flex:1;min-width:0}
+  .ptitle{font-size:18px;font-weight:600;line-height:1.3}
+  .psub{font-size:13px;color:var(--muted);line-height:1.45;margin-top:3px}
+  .pname{background:none;border:0;padding:0;margin:6px 10px 0 0;font:inherit;color:var(--gold);font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:5px;min-height:28px;border-bottom:1px solid rgba(232,176,75,.4)}
+  .pname:after{content:"\2197";font-size:12px;opacity:.8}
+  .pflag{display:inline-block;font-size:10px;letter-spacing:.08em;font-weight:700;color:var(--blue);border:1px solid rgba(127,163,232,.4);border-radius:3px;padding:1px 6px;margin-top:7px;vertical-align:middle}
+
+  /* menu */
+  .mgrp{margin-bottom:30px}
+  .mgrp .gn{display:flex;align-items:baseline;gap:14px;margin-bottom:12px}
+  .mgrp .gn b{font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;color:var(--gold)}
+  .mgrp .gn .rule{flex:1;height:1px;background:linear-gradient(90deg,rgba(232,176,75,.4),transparent)}
+  .mrow{display:flex;align-items:baseline;gap:10px;padding:5px 0}
+  .mrow .x{font-size:16px;line-height:1.45;color:#E6EAF2}
+  .mtag{flex:none;font-size:10px;letter-spacing:.08em;font-weight:700;color:var(--muted)}
+  .barline{margin-top:18px;font-size:15px;line-height:1.8;color:#E6EAF2}
+  .barline .bh{display:block;font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;color:var(--gold);margin-bottom:8px}
+
+  /* route */
+  .route{margin-top:14px;padding-left:22px;border-left:1px solid rgba(232,176,75,.3)}
+  .stop{position:relative;padding:16px 0}
+  .stop::before{content:"";position:absolute;left:-27px;top:21px;width:9px;height:9px;border-radius:50%;background:var(--ink);border:2px solid var(--muted)}
+  .stop.key::before{background:var(--gold);border-color:var(--gold);box-shadow:0 0 0 5px rgba(232,176,75,.16);animation:glowpulse 3s ease-in-out infinite}
+  .stop .sn{font-size:18px;font-weight:600}
+  .stop.key .sn{color:var(--gold)}
+  .stop .sd{font-size:14px;color:var(--muted);line-height:1.5;margin-top:4px}
+
+  /* map */
+  .mapcard{display:block;position:relative;border-radius:6px;overflow:hidden;margin-top:18px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+  .mapcard img{display:block;width:100%;height:auto}
+  .mapcard .ov{position:absolute;left:16px;bottom:14px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--gold)}
+
+  /* partners */
+  .peset{display:flex;justify-content:center;margin:18px 0 34px}
+  .peset img{width:min(240px,66%);height:auto}
+  .plogos{display:flex;align-items:center;justify-content:center;gap:34px;flex-wrap:wrap}
+  .plogos a{display:flex;align-items:center;justify-content:center;min-height:56px}
+  .plogos .lz{height:52px}
+  .plogos .lc{height:30px}
+  .plogos .lf{height:62px;border-radius:4px}
+  .dbcta{display:inline-flex;align-items:center;gap:8px;margin-top:10px;padding:15px 26px;background:var(--gold);color:var(--ink);border-radius:6px;font-weight:800;font-size:15px;letter-spacing:.01em;min-height:44px}
+  .dbcta:hover{background:var(--gold2);color:var(--ink)}
+
+  /* close */
+  .hashtag{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:30px;color:var(--text)}
+  .contact a{color:var(--text);min-height:28px;display:inline-flex;align-items:center}
+  .flogos{display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .flogos img{height:26px;width:auto}
+  .fine{font-size:11px;color:var(--muted);line-height:1.5;letter-spacing:.03em}
+
+  /* overlay */
+  .ov-wrap{position:fixed;inset:0;z-index:80;display:none;align-items:flex-end;justify-content:center}
+  .ov-wrap.show{display:flex}
+  .ov-bd{position:absolute;inset:0;background:rgba(3,8,16,.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transition:opacity .4s}
+  .ov-wrap.show .ov-bd{opacity:1}
+  .ov-card{position:relative;width:100%;max-width:620px;background:var(--ink);border-top:2px solid var(--gold);padding:30px var(--sp) max(40px,env(safe-area-inset-bottom));transform:translateY(100%);transition:transform .5s cubic-bezier(.2,.7,.2,1);max-height:88svh;overflow:auto}
+  .ov-wrap.show .ov-card{transform:none}
+  .ov-x{position:absolute;top:16px;right:16px;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:none;color:var(--text);font-size:18px;cursor:pointer}
+  .ov-av{width:72px;height:72px;border-radius:50%;object-fit:cover;background:#14264A;margin-bottom:16px}
+  .ov-avph{width:72px;height:72px;border-radius:50%;background:#14264A;color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;margin-bottom:16px}
+  .ov-nm{font-size:23px;font-weight:700}
+  .ov-rl{font-size:14px;color:var(--soft);line-height:1.45;margin-top:6px}
+  .ov-bi{font-size:15px;color:var(--muted);line-height:1.6;margin-top:14px}
+  .ov-li{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;margin-top:18px;display:inline-flex;gap:6px;align-items:center;min-height:32px}
+
+  @media (max-width:560px){ :root{--sp:20px} .ptime{width:84px} .plogos{gap:26px} }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01s!important;animation-delay:0s!important}
+    .rv{opacity:1;transform:none}.lit{filter:none;opacity:1}
+  }
+</style>
+</head>
+<body>
+
+<div id="pre"><div class="nm">Bohemia&nbsp;Rhapsody</div><div class="ln"></div></div>
+
+<div class="wrap">
+
+  <!-- SCENE 1 — HERO -->
+  <header class="scene end">
+    <div class="heroImg" data-hero>
+      <div class="kbox">
+        <div class="layer l-base"></div>
+        <div class="layer l-moon"></div>
+        <div class="layer l-castle"></div>
+        <div class="layer l-wide"></div>
+        <div class="layer l-bandh"></div>
+        <div class="layer l-full"></div>
+        <div class="glow"></div>
+        <div class="shimmer"></div>
+      </div>
+    </div>
+    <div class="sveil v-bottom"></div>
+    <div class="heroTop">
+      <img src="https://nadinensmark-bot.github.io/defencehub-rozcestnik/onboard/assets/dh-ci.png" alt="Defence Hub, CzechInvest">
+      <img src="https://nadinensmark-bot.github.io/defencehub-rozcestnik/onboard/assets/diana.png" alt="Part of the DIANA network">
+    </div>
+    <div class="heroBot">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="kicker">NATO DIANA Accelerators Summit &middot; Prague &middot; 22 October 2026</div>
+        <h1>
+          <span style="animation:wordIn 1.1s 5.0s cubic-bezier(.2,.7,.2,1) both">One</span>
+          <span style="animation:wordIn 1.1s 5.12s cubic-bezier(.2,.7,.2,1) both">ship</span>
+          <span style="animation:wordIn 1.1s 5.24s cubic-bezier(.2,.7,.2,1) both">can</span>
+          <span style="animation:wordIn 1.1s 5.36s cubic-bezier(.2,.7,.2,1) both">explore.</span>
+          <span class="ln2"></span>
+          <span style="color:var(--gold);animation:wordIn 1.1s 5.7s cubic-bezier(.2,.7,.2,1) both">A</span>
+          <span style="color:var(--gold);animation:wordIn 1.1s 5.82s cubic-bezier(.2,.7,.2,1) both">fleet</span>
+          <span style="color:var(--gold);animation:wordIn 1.1s 5.94s cubic-bezier(.2,.7,.2,1) both">changes</span>
+          <span style="color:var(--gold);animation:wordIn 1.1s 6.06s cubic-bezier(.2,.7,.2,1) both">history.</span>
+        </h1>
+      </div>
+      <div class="fact">
+        <div><div class="k">Vessel</div>Bohemia Rhapsody</div>
+        <div><div class="k">Boarding</div>18:30 &middot; Dvořákovo nábřeží</div>
+        <div><div class="k">Ashore</div>by 21:00</div>
+      </div>
+      <div class="scrollcue"><div class="cbar"></div><div class="ct">Scroll</div></div>
+    </div>
+  </header>
+
+  <!-- SCENE 2 — the room -->
+  <section class="scene center onimg">
+    <div class="sbg" data-px="0.12" style="background-image:url('https://nadinensmark-bot.github.io/defencehub-rozcestnik/onboard/assets/break-castle.jpg');background-position:50% 40%"></div>
+    <div class="sveil v-center"></div>
+    <div class="sin" style="display:flex;flex-direction:column;gap:20px">
+      <div class="rv tiny">One night on the Vltava</div>
+      <p class="rv d1 big">Tonight, the river is the room.</p>
+      <p class="rv d2 sub" style="max-width:30em">The people building the Alliance's edge, off the conference floor and onto the water.</p>
+    </div>
+  </section>
+
+  <!-- SCENE 3 — the idea -->
+  <section class="scene center onimg">
+    <div class="sbg" data-px="0.1" style="background-image:url('https://nadinensmark-bot.github.io/defencehub-rozcestnik/onboard/assets/stars.jpg');background-position:50% 30%"></div>
+    <div class="sveil v-center"></div>
+    <div class="sin" style="display:flex;flex-direction:column;gap:26px">
+      <p class="rv big">One ship explores.<br>A fleet changes history.</p>
+      <div class="rv d1 nums">
+        <div><div class="n">19</div><div class="c">Accelerators aboard</div></div>
+        <div><div class="n">2</div><div class="c">Hours on the river</div></div>
+        <div><div class="n">1</div><div class="c">Ship, one manifest</div></div>
+      </div>
+      <p class="rv d2 sub">No startup, no programme, no country moves it alone. The fleet does.</p>
+    </div>
+  </section>
+
+  <!-- SCENE 4 — the evening -->
+  <section class="scene flow">
+    <div class="sbg" style="background-image:url('https://nadinensmark-bot.github.io/defencehub-rozcestnik/onboard/assets/stars.jpg');background-position:50% 60%;opacity:.5"></div>
+    <div class="sveil v-heavy"></div>
+    <div class="sin">
+      <div class="rv eyebrow">The evening</div>
+      <h2 class="rv d1 huge lit" style="margin-top:14px">The <em>running order</em></h2>
+      <p class="rv d1 tiny" style="margin-top:14px;text-transform:none;letter-spacing:.02em;font-size:13px;color:var(--muted)">Tap a name for a short profile.</p>
+      <div class="rv d2 plist" id="prog"></div>
+      <p class="tiny" style="margin-top:18px;text-transform:none;letter-spacing:.02em;font-size:12px;color:var(--muted)">Running order indicative; the captain and the evening may adjust.</p>
+    </div>
+  </section>
+
+  <!-- SCENE 5 — the toast -->
+  <section class="scene center onimg">
+    <div class="sbg" data-px="0.14" style="background-image:url('https://nadinensmark-bot.github.io/defencehub-rozcestnik/onboard/assets/hero.jpg');background-position:58% 42%"></div>
+    <div class="sveil v-center"></div>
+    <div class="sin" style="display:flex;flex-direction:column;gap:18px;text-align:center;align-items:center">
+      <div class="rv tiny">The signature moment</div>
+      <p class="rv d1 big" style="max-width:14em">Beneath the floodlit Castle, we raise a glass.</p>
+      <p class="rv d2 sub" style="max-width:26em">One manifest, one skyline, one moment the whole room shares.</p>
+    </div>
+  </section>
+
+  <!-- SCENE 6 — served on the Vltava -->
+  <section class="scene flow">
+    <div class="sbg" style="background-image:url('https://nadinensmark-bot.github.io/defencehub-rozcestnik/onboard/assets/stars.jpg');background-position:50% 50%;opacity:.45"></div>
+    <div class="sveil v-heavy"></div>
+    <div class="sin">
+      <div class="rv eyebrow">At the table</div>
+      <h2 class="rv d1 huge lit" style="margin-top:14px">Served on <em>the Vltava</em></h2>
+      <p class="rv d1" style="margin:16px 0 28px;font-size:14px;color:var(--muted);line-height:1.55">Buffet throughout the cruise. V vegetarian &middot; VG vegan &middot; GF gluten-free. Ask the crew about allergens.</p>
+      <div id="menuBox"></div>
+      <div class="rv barline">
+        <span class="bh">Open bar &middot; 19:00 to 21:00</span>
+        Pilsner Urquell &middot; Kozel Dark 11° &middot; Birell non-alcoholic &middot; Cider<br>
+        Grillo Codici dry white &middot; Nero d'Avola Rosato dry rosé &middot; Nero d'Avola dry red<br>
+        Soft drinks &middot; juices &middot; still and sparkling water &middot; coffee and tea
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 7 — the course -->
+  <section class="scene flow">
+    <div class="sbg" data-px="0.1" style="background-image:url('https://nadinensmark-bot.github.io/defencehub-rozcestnik/onboard/assets/break-castle.jpg');background-position:50% 50%;opacity:.4"></div>
+    <div class="sveil v-heavy"></div>
+    <div class="sin">
+      <div class="rv eyebrow">The course</div>
+      <h2 class="rv d1 huge">Castle to <em>Vyšehrad</em></h2>
+      <div class="rv d2 route">
+        <div class="stop"><div class="sn">Dvořákovo nábřeží</div><div class="sd">Boarding from 18:30, molo 3 by Čech Bridge.</div></div>
+        <div class="stop"><div class="sn">Cast off</div><div class="sd">19:00, upstream into the historic centre.</div></div>
+        <div class="stop key"><div class="sn">Beneath the floodlit Castle</div><div class="sd">The toast, under Prague Castle and Charles Bridge.</div></div>
+        <div class="stop"><div class="sn">Vyšehrad and turn</div><div class="sd">Past the fortress, then the course turns back.</div></div>
+        <div class="stop"><div class="sn">Ashore</div><div class="sd">Back at Dvořákovo nábřeží by 21:00.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 8 — the fleet -->
+  <section class="scene flow">
+    <div class="sbg" style="background-image:url('https://nadinensmark-bot.github.io/defencehub-rozcestnik/onboard/assets/stars.jpg');background-position:50% 40%;opacity:.5"></div>
+    <div class="sveil v-heavy"></div>
+    <div class="sin">
+      <div class="rv eyebrow">The fleet</div>
+      <h2 class="rv d1 huge">19 accelerators.<br><em>One direction.</em></h2>
+      <p class="rv d1 sub" style="margin-top:16px">Defence Hub CzechInvest is the Czech accelerator site in the NATO DIANA network. Tonight, the network is on board.</p>
+      <a class="rv d2 mapcard" href="https://defencehub.gov.cz/nato-diana-en/#mapa-diana" target="_blank" rel="noopener">
+        <img src="https://nadinensmark-bot.github.io/defencehub-rozcestnik/onboard/assets/diana-map.png" alt="Map of DIANA accelerator sites across the Alliance">
+        <div class="ov">Explore the DIANA map &#8599;</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- SCENE 8b — startups we're proud of -->
+  <section class="scene flow center onimg">
+    <div class="sbg" style="background-image:url('https://nadinensmark-bot.github.io/defencehub-rozcestnik/onboard/assets/stars.jpg');background-position:50% 55%;opacity:.5"></div>
+    <div class="sveil v-heavy"></div>
+    <div class="sin" style="text-align:center;display:flex;flex-direction:column;gap:18px;align-items:center">
+      <div class="rv eyebrow">The portfolio</div>
+      <h2 class="rv d1 huge">Startups we're<br><em>proud of</em></h2>
+      <p class="rv d1 sub" style="max-width:24em">The Czech defence and dual-use companies this ecosystem is building. See who the Hub is backing.</p>
+      <a class="rv d2 dbcta" href="https://defencehub.gov.cz/solutions-database/" target="_blank" rel="noopener">Open the Solutions Database <span style="font-size:15px">&#8599;</span></a>
+    </div>
+  </section>
+
+  <!-- SCENE 9 — made possible by -->
+  <section class="scene flow center">
+    <div class="sveil v-heavy" style="background:var(--ink)"></div>
+    <div class="sin" style="text-align:center">
+      <div class="rv eyebrow">Made possible by the fleet</div>
+      <a class="rv d1 peset" href="https://www.eset.com/cz/" target="_blank" rel="noopener"><img src="https://nadinensmark-bot.github.io/defencehub-rozcestnik/onboard/assets/eset.png" alt="ESET"></a>
+      <div class="rv d2 plogos">
+        <a href="https://zria.cz/en/" target="_blank" rel="noopener"><img class="lz" src="https://nadinensmark-bot.github.io/defencehub-rozcestnik/onboard/assets/zria.png" alt="ZRIA"></a>
+        <a href="https://csg.com/en" target="_blank" rel="noopener"><img class="lc" src="https://nadinensmark-bot.github.io/defencehub-rozcestnik/onboard/assets/csg.png" alt="CSG"></a>
+        <a href="https://www.fff.global/en/" target="_blank" rel="noopener"><img class="lf" src="https://nadinensmark-bot.github.io/defencehub-rozcestnik/onboard/assets/fff.png" alt="Future Forces Forum"></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 10 — close -->
+  <section class="scene end onimg" style="min-height:92svh">
+    <div class="sbg" data-px="0.12" style="background-image:url('https://nadinensmark-bot.github.io/defencehub-rozcestnik/onboard/assets/hero.jpg');background-position:58% 44%"></div>
+    <div class="sveil v-bottom"></div>
+    <div class="sin" style="padding-bottom:max(44px,env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:26px">
+      <p class="rv hashtag">#BiggerTogether 🤍</p>
+      <div class="rv d1 contact" style="display:flex;flex-direction:column;gap:5px">
+        <div class="tiny" style="margin-bottom:4px">On-site contact</div>
+        <div style="font-size:18px;font-weight:700">Nadine Sokolová</div>
+        <a href="tel:+420722719237">+420 722 719 237</a>
+        <a href="mailto:nada.sokolova@czechinvest.gov.cz">nada.sokolova@czechinvest.gov.cz</a>
+      </div>
+      <div class="rv d2 flogos">
+        <img src="https://nadinensmark-bot.github.io/defencehub-rozcestnik/onboard/assets/dh-ci.png" alt="Defence Hub, CzechInvest">
+        <img src="https://nadinensmark-bot.github.io/defencehub-rozcestnik/onboard/assets/diana.png" alt="Part of the DIANA network">
+      </div>
+      <div class="rv d2 fine">NATO DIANA Accelerators Summit Prague &middot; 22 October 2026 &middot; Invitation only</div>
+    </div>
+  </section>
+</div>
+
+<!-- speaker overlay -->
+<div class="ov-wrap" id="ov">
+  <div class="ov-bd" data-close></div>
+  <div class="ov-card">
+    <button class="ov-x" data-close aria-label="Close">&times;</button>
+    <div id="ovBody"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false;
+
+  window.addEventListener('load', function(){
+    setTimeout(function(){ var p=document.getElementById('pre'); if(p){ p.classList.add('gone'); setTimeout(function(){ p.style.display='none'; },1200);} }, 600);
+  });
+
+  var speakers = {
+    mauer:{name:'Leoš Mauer',role:'Director, Defence Hub CzechInvest',bio:'Leads Defence Hub, the gateway for defence and dual-use innovation at CzechInvest and the Czech accelerator site in the NATO DIANA network. Connects startups, industry, armed forces and investors.',li:'https://www.linkedin.com/in/leo%C5%A1-mauer/',photo:'https://nadinensmark-bot.github.io/defencehub-rozcestnik/onboard/assets/mauer.jpg',initials:'LM'},
+    landovsky:{name:'Jakub Landovský',role:'Director General, Defence Policy and Strategy Division, Ministry of Defence of the Czech Republic',bio:'Czech Ambassador to NATO 2019 to 2024 and Deputy Minister of Defence 2015 to 2019. Lawyer and lecturer at Charles University.',li:'https://www.linkedin.com/in/jakub-landovsk%C3%BD-46a72614/',initials:'JL'},
+    michal:{name:'Jan Michal',role:'Director General, CzechInvest',bio:'Heads the Czech investment and business development agency, home of Defence Hub.',li:'https://www.linkedin.com/in/jan-michal-87840ba6/',initials:'JM'},
+    brezna:{name:'David Března',role:'Vice-President of Corporate Solutions Operations and Scale Up, ESET',bio:'Leads corporate solutions operations and scale-up at ESET, the cybersecurity company protecting organisations across the Alliance.',li:'https://www.linkedin.com/in/david-brezna-204b42/',initials:'DB'},
+    puz:{name:'Mykyta Puz',role:'Ukraine, technology development and testing',bio:'On how Ukrainian defence technology is developed, iterated and tested at the speed of war, and what that means for Allied innovators.',li:'https://www.linkedin.com/in/mykyta-puz-3b28a725/',initials:'MP'}
+  };
+  var programme = [
+    {time:'18:30 to 19:00',title:'Boarding',sub:'Dvořákovo nábřeží, beneath Prague Castle'},
+    {time:'19:00',title:'Cast off'},
+    {time:'19:00 to 19:05',title:'Welcome aboard',sp:['mauer']},
+    {time:'19:05 to 19:07',title:'Ministry of Defence',sp:['landovsky']},
+    {time:'19:08 to 19:10',title:'CzechInvest',sp:['michal']},
+    {time:'19:11 to 19:13',title:'Address',sub:'Speaker to be confirmed'},
+    {time:'19:14 to 19:16',title:'Thanks to our partners'},
+    {time:'19:17 to 19:22',title:'ESET',sp:['brezna']},
+    {time:'19:23 to 19:25',title:'ZRIA',sub:'Speaker to be confirmed'},
+    {time:'19:26 to 19:40',title:'Ukraine: building and testing at the speed of war',sub:'Conversation',sp:['puz','mauer']},
+    {time:'19:41 to 21:00',title:'Buffet and open networking',sub:'Served on both decks'},
+    {time:'by 21:00',title:'Return to Dvořákovo nábřeží'}
+  ];
+  var menu = [
+    {name:'Welcome canapés',items:[{x:'Camembert with cranberry jelly on light bread',tag:'V'},{x:'Smoked Norwegian salmon, lemon chutney, dark corn baguette'}]},
+    {name:'Cold buffet',items:[{x:'Breads and dressings',tag:'V'},{x:'Grana Padano',tag:'V, GF'},{x:'Bocconcini salad',tag:'V, GF'},{x:'Duck pâté with cranberry',tag:'GF'},{x:'Czech cheeses and charcuterie',tag:'GF'},{x:'Pork belly',tag:'GF'},{x:'Mixed leaf salad',tag:'VG, GF'},{x:'Greek salad',tag:'V, GF'}]},
+    {name:'Hot buffet',items:[{x:'Kulajda, creamy dill and mushroom soup, poached egg',tag:'V'},{x:'Bone-in roast ham',tag:'GF'},{x:'Beef goulash braised in dark beer'},{x:'Chicken schnitzel bites'},{x:'Pasta pomodoro',tag:'V'},{x:'Spicy chicken wings, chilli and honey',tag:'GF'},{x:'Paella with roasted vegetables',tag:'VG'}]},
+    {name:'Sides',items:[{x:'Grilled vegetables',tag:'VG, GF'},{x:'Karlovy Vary bread dumplings',tag:'V'},{x:'Jasmine rice',tag:'VG, GF'},{x:'Roasted potato wedges',tag:'VG, GF'}]},
+    {name:'Desserts',items:[{x:'Chocolate brownies',tag:'V'},{x:'Cheesecake',tag:'V'},{x:'Fresh fruit salad',tag:'VG, GF'}]}
+  ];
+  function esc(s){ return String(s); }
+
+  // programme
+  var prog = document.getElementById('prog');
+  programme.forEach(function(r){
+    var line = document.createElement('div');
+    line.className = 'pline';
+    var sub = r.sub ? '<div class="psub">'+esc(r.sub)+'</div>' : '';
+    var names = '';
+    if (r.sp){
+      r.sp.forEach(function(k){
+        var s = speakers[k];
+        if (s){ names += '<button class="pname" type="button" data-sp="'+k+'">'+esc(s.name)+'</button>'; }
+      });
+    }
+    var flag = (r.sub && r.sub.indexOf('confirmed') > -1) ? '<span class="pflag">TBC</span>' : '';
+    line.innerHTML = '<div class="ptime">'+esc(r.time)+'</div><div class="pmid"><div class="ptitle">'+esc(r.title)+'</div>'+sub+flag+(names?'<div>'+names+'</div>':'')+'</div>';
+    prog.appendChild(line);
+  });
+
+  // menu
+  var mb = document.getElementById('menuBox');
+  menu.forEach(function(g){
+    var el = document.createElement('div');
+    el.className = 'mgrp rv';
+    var rows = '';
+    g.items.forEach(function(it){
+      var tag = it.tag ? '<div class="mtag">'+esc(it.tag)+'</div>' : '';
+      rows += '<div class="mrow"><div class="x">'+esc(it.x)+'</div>'+tag+'</div>';
+    });
+    el.innerHTML = '<div class="gn"><b>'+esc(g.name)+'</b><div class="rule"></div></div>'+rows;
+    mb.appendChild(el);
+  });
+
+  // overlay
+  var ov = document.getElementById('ov');
+  var ovBody = document.getElementById('ovBody');
+  function openSp(k){
+    var s = speakers[k];
+    if (!s) return;
+    var av = s.photo ? '<img class="ov-av" src="'+s.photo+'" alt="'+esc(s.name)+'">' : '<div class="ov-avph">'+esc(s.initials)+'</div>';
+    ovBody.innerHTML = av + '<div class="ov-nm">'+esc(s.name)+'</div><div class="ov-rl">'+esc(s.role)+'</div><div class="ov-bi">'+esc(s.bio)+'</div><a class="ov-li" href="'+s.li+'" target="_blank" rel="noopener">LinkedIn <span style="font-size:14px">↗</span></a>';
+    ov.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeOv(){ ov.classList.remove('show'); document.body.style.overflow = ''; }
+  document.addEventListener('click', function(e){
+    var t = e.target.closest ? e.target.closest('[data-sp]') : null;
+    if (t){ openSp(t.getAttribute('data-sp')); return; }
+    if (e.target.closest && e.target.closest('[data-close]')){ closeOv(); }
+  });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeOv(); });
+
+  // reveal
+  var rvs = document.querySelectorAll('.rv, .lit');
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin:'0px 0px -8% 0px', threshold:0.1 });
+    rvs.forEach(function(el){ io.observe(el); });
+  } else {
+    rvs.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  // parallax
+  if (!reduce){
+    var hero = document.querySelector('[data-hero]');
+    var pxs = document.querySelectorAll('[data-px]');
+    var ticking = false;
+    function run(){
+      ticking = false;
+      var vh = window.innerHeight, y = window.scrollY;
+      if (hero){ if (y < vh * 1.2){ hero.style.transform = 'translate3d(0,'+(y*0.3).toFixed(1)+'px,0)'; } }
+      pxs.forEach(function(el){
+        var f = parseFloat(el.getAttribute('data-px'));
+        var p = el.parentElement.getBoundingClientRect();
+        if (p.bottom < -200){ return; }
+        if (p.top > vh + 200){ return; }
+        var c = p.top + p.height/2 - vh/2;
+        el.style.transform = 'translate3d(0,'+(-c*f).toFixed(1)+'px,0)';
+      });
+    }
+    function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(run); } }
+    window.addEventListener('scroll', onScroll, { passive:true });
+    window.addEventListener('resize', onScroll);
+    window.addEventListener('load', onScroll);
+    onScroll();
+  }
+})();
+</script>
+</body>
+</html>
