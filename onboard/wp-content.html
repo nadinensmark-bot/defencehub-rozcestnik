@@ -111,6 +111,13 @@
   .pname{background:none;border:0;padding:0;margin:6px 10px 0 0;font:inherit;color:var(--gold);font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:5px;min-height:28px;border-bottom:1px solid rgba(232,176,75,.4)}
   .pname:after{content:"\2197";font-size:12px;opacity:.8}
   .pflag{display:inline-block;font-size:10px;letter-spacing:.08em;font-weight:700;color:var(--blue);border:1px solid rgba(127,163,232,.4);border-radius:3px;padding:1px 6px;margin-top:7px;vertical-align:middle}
+  .accHead{display:flex;align-items:center;gap:12px;width:100%;background:none;border:0;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);margin-top:-1px;padding:17px 2px;min-height:44px;color:inherit;font:inherit;text-align:left;cursor:pointer}
+  .accHead .accLabel{flex:1;font-size:17px;font-weight:600}
+  .accHead .accMeta{font-size:12px;color:var(--muted);letter-spacing:.04em}
+  .accChev{flex:none;width:14px;height:14px;color:var(--gold);transition:transform .35s}
+  .acc.open>.accHead .accChev,.macc.open>.accHead .accChev{transform:rotate(180deg)}
+  .accBody{max-height:0;overflow:hidden;transition:max-height .55s ease}
+  .macc .accLabel{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--gold)}
 
   /* menu */
   .mgrp{margin-bottom:30px}
@@ -259,9 +266,10 @@
     <div class="sin">
       <div class="rv eyebrow">The evening</div>
       <h2 class="rv d1 huge lit" style="margin-top:14px">The <em>running order</em></h2>
-      <p class="rv d1 tiny" style="margin-top:14px;text-transform:none;letter-spacing:.02em;font-size:13px;color:var(--muted)">Tap a name for a short profile.</p>
-      <div class="rv d2 plist" id="prog"></div>
-      <p class="tiny" style="margin-top:18px;text-transform:none;letter-spacing:.02em;font-size:12px;color:var(--muted)">Running order indicative; the captain and the evening may adjust.</p>
+      <div class="rv d2 acc" id="progAcc" style="margin-top:20px">
+        <button class="accHead" type="button"><span class="accLabel">Open the running order</span><span class="accMeta">18:30 to 21:00</span><svg class="accChev" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 5l5 5 5-5"></path></svg></button>
+        <div class="accBody"><div class="plist" id="prog" style="padding-top:4px"></div><p class="tiny" style="margin:14px 0 2px;text-transform:none;letter-spacing:.02em;font-size:12px;color:var(--muted)">Tap a name for a short profile. Running order indicative; the captain and the evening may adjust.</p></div>
+      </div>
     </div>
   </section>
 
@@ -438,19 +446,26 @@
     line.innerHTML = '<div class="ptime">'+esc(r.time)+'</div><div class="pmid"><div class="ptitle">'+esc(r.title)+'</div>'+sub+flag+(names?'<div>'+names+'</div>':'')+'</div>';
     prog.appendChild(line);
   });
+  var pAcc = document.getElementById('progAcc');
+  if (pAcc){
+    var ph = pAcc.querySelector('.accHead'), pb = pAcc.querySelector('.accBody');
+    ph.addEventListener('click', function(){ var o = pAcc.classList.toggle('open'); pb.style.maxHeight = o ? pb.scrollHeight+'px' : '0'; });
+  }
 
   // menu
   var mb = document.getElementById('menuBox');
   menu.forEach(function(g){
     var el = document.createElement('div');
-    el.className = 'mgrp rv';
+    el.className = 'macc rv';
     var rows = '';
     g.items.forEach(function(it){
       var tag = it.tag ? '<div class="mtag">'+esc(it.tag)+'</div>' : '';
       rows += '<div class="mrow"><div class="x">'+esc(it.x)+'</div>'+tag+'</div>';
     });
-    el.innerHTML = '<div class="gn"><b>'+esc(g.name)+'</b><div class="rule"></div></div>'+rows;
+    el.innerHTML = '<button class="accHead" type="button"><span class="accLabel">'+esc(g.name)+'</span><svg class="accChev" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 5l5 5 5-5"></path></svg></button><div class="accBody"><div style="padding:8px 0 18px">'+rows+'</div></div>';
     mb.appendChild(el);
+    var hd = el.querySelector('.accHead'), bd = el.querySelector('.accBody');
+    hd.addEventListener('click', function(){ var o = el.classList.toggle('open'); bd.style.maxHeight = o ? bd.scrollHeight+'px' : '0'; });
   });
 
   // overlay
